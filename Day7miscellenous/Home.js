@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 const Home = () => {
 
-      const [info,setInfo] = useState({name:"",address:"",age:"",fieldname:""});
-      const [allInfo,setAllInfo] = useState([]);
+      const [info,setInfo] = useState({name:"",address:"",age:""});
+      const [allInfo,setAllInfo] = useState(["pune","mumbai"]);
 
       // let obj = {name:"code first",address:"pune",age:"25"};
 
@@ -16,6 +16,10 @@ const Home = () => {
   // obj = {...obj,age:"mumbai"}
 
 
+    // let obj = {name:"code",address:"pune",age:24};
+    // console.log(obj)
+    // let convertTonum = JSON.stringify(obj);
+    // console.log(convertTonum);
 
 const commonHandlerObj = (event,fieldname)=>{
   setInfo(prevState=>({...prevState,[fieldname]:event.target.value}));
@@ -31,9 +35,26 @@ console.log(allInfo);
  
 }
 
+ 
+// let arrr = ["pune","mumbai","delhi"];
+// for(let x=0;x <=arrr.length;x++){
+  //  arrr[x]
+// }
+
+// for(let x of arrr){
+//   debugger
+//      console.log(x)
+// }
+// let objnew = {name:"chait",address:"pune",age:23}
+// debugger
+// console.log(objnew["age"])
+// for(let x in objnew){
+//   debugger
+//     console.log(objnew[x])
+// }
     return (
       <div className='container'>
-        
+        <h1>{info.name}</h1>
     <div className='row col-md-4 offset-md-4 mt-5'>
           <h2 className='text-center'> Person Detail</h2>
    
@@ -59,7 +80,38 @@ console.log(allInfo);
         </form>
         </div>
           
-         
+<div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+</div>
         </div>
     );
 };
