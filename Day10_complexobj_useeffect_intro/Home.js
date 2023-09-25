@@ -1,16 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Home = () => {
   //useState is a hook
+
+  //useEffect
 
   const [formData,setFormData] = useState({name:"",address:"",age:""});
   const [allInfo,setAllInfo] = useState([]);
   const [postion,setPosition] = useState("");
   const [showFlag,setShowFlag] = useState(false);
+  const [obj ,setObj] = useState({
+    name:"Pranav",
+    address:{
+      permanentAddrs:"India",
+      tempAddress:"",
+      cords:["090.43434"]
+    },
+    age:"24",
+    mobile:"4343334"
+  })
 
-  
+  useEffect(()=>{
+    //server call apicall
+    console.log("useEffect call")
+    // setFormData(prevState=>({...prevState,name:"code first"}));
+  },[])
 
-  
+  useEffect(()=>{
+    //server call apicall
+    console.log("useEffect call")
+    // setFormData(prevState=>({...prevState,name:"code first"}));
+  },[formData])
+
+
+  const upDateAddress=()=>{
+    //to update permanentAddrs
+    setObj(prev=>({
+      ...prev,address:{...prev.address,permanentAddrs:"Autralia"}
+    }))
+
+    //to update tempAddress
+    setObj(prev=>({
+      ...prev,address:{...prev.address,tempAddress:"Banglore"}
+    }))
+
+    //to update array cords
+    setObj(prev=>({
+      ...prev,
+      address:{...prev.address,cords:[...prev.address.cords,"594004.454"]}
+    }))
+
+  }
+
 
   const onChangeHandler=(event,fieldname)=>{
         console.log(event.target.value,">>",fieldname);
@@ -61,10 +102,13 @@ const upSaveHandler=()=>{
 }
     return (
       <div className='container'>
+        <div>
+             <h1>{obj.address.permanentAddrs}</h1>
+             <button onClick={()=>upDateAddress()}>Update permanentAddrs</button>
+        </div>
         
     <div className='row col-md-4 offset-md-4 mt-5'>
           <h2 className='text-center'> Person Detail</h2>
-          
    
         <form onSubmit={(e)=>onSubmitHandler(e)}>
           <div className="form-group">
