@@ -7,7 +7,12 @@ const Home = () => {
 
   //India , Australia , America , New Zeland
 
-  const [formData, setFormData] = useState({ name: "", address: {permanent:"",tepmAddress:""}, age: "" ,country:"" });
+  const [formData, setFormData] = useState({ name: "",
+                                             address: {permanent:"",tepmAddress:""},
+                                             mobile: {permanent:"",tepmAddress:""},
+                                             age: "" ,
+                                             country:"" 
+                                            });
   const [allInfo, setAllInfo] = useState([]);
   const [postion, setPosition] = useState("");
   const [showFlag, setShowFlag] = useState(false);
@@ -32,7 +37,7 @@ const Home = () => {
 
   // }
 
-  //for mobile and address
+  //for mobile and address         vlue     permanent   mobile
   const onChangeHandlernestednew= (event, fieldname,parentname)=>{
     setFormData(prevState=>({
       ...prevState,
