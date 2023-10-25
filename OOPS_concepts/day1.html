@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h4>OOps concept</h4>
+
+    <!-- Object oreinted programming
+
+
+    what are the concepts of OOps?
+
+    object 
+    class
+    Abstraction
+    Encapsulation 
+    Inheritance 
+    Polymorphism
+
+
+
+    1)Objects   
+
+      Objects can be created in two ways
+      a)Object literals
+      b)Object contructor
+
+   a) Object Literals  
+
+     let  obj = {
+        name :"chaitenya",
+        address:"Pune"
+     } -->
+
+     <script>
+
+// a) Object Literals  
+
+// let  obj = {
+//    name :"chaitenya",
+//    address:"Pune"
+// }
+ let  obj = {
+        name :"chaitenya",
+        address:"Pune",
+        mobile:49834839,
+        flag: true,
+        showDetail:function (){
+               
+            //logic here
+            return  obj.name +"__"+obj.address
+        }
+
+
+ }
+
+ console.log(obj.showDetail());
+
+
+//  b)Object contructor of function constructor
+
+function person(name,address,mobile){
+
+    this.name = name;
+    this.address = address;
+    this.mobile = mobile
+}
+
+let mobile = ["49589458495","9848545849"]
+
+const person_One = new person("chaitenya","pune",mobile);  //new instance create 
+
+const person_two = new person("vilas","mumbai",mobile);
+
+console.log(person_One);
+console.log(person_two);
+
+
+// let obj = {
+//     name:"",
+//     address:"",
+//     moiblr:""
+// }
+  
+let name = "fdfdfd"
+name=598698
+
+
+        </script>
+
+
+    
+</body>
+</html>
