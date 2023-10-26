@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        function Person (name,email){
+            this.name = name;
+            this.email = email;
+
+          this.getDetil = function (){
+                 return "this is "+ this.name+ "_"+this.email;
+          }
+
+          this.chngeName= function (){
+            this.name = "suraj"
+          }
+        }
+
+
+        function Student (name,email){
+            this.name = name;
+            this.email = email;
+        }
+
+        Student.prototype.getDetil = function (){
+                 return "this is "+ this.name+ "_"+this.email;
+          }
+         
+        Student.prototype.chngeName = function (){
+            this.name = "suraj"
+          }
+
+
+          const student_one = new Student("Shubhsm","shubham@gmail.com");
+         console.log(student_one)
+
+        const person_one = new Person("vinay","vinay@gmail.com");
+        // console.log(person_one.name)
+        // console.log(person_one.email)
+        // console.log(person_one.getDetil())
+        // person_one.chngeName();
+        person_one.name = "ravina";
+        console.log(person_one);
+
+        const person_two = new Person("shweta","shweta@gmail.com");
+         person_two.chngeName()
+        console.log(person_two);
+
+        
+
+        // what is prototype?
+            //  a)Prtotype can be  a varibale
+            // b)Prototype can be function or method
+            // c)every object and function has a properyty named by default
+            let a =[];
+            console.log(a)
+
+
+
+
+
+
+    </script>
+</body>
+</html>
