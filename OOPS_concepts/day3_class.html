@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- class -->
+    <!-- classes are more modern and convinent way to define obj -->
+    <script>
+        class Vehicle {
+            
+            getDetail(){
+                this.brand="toyota";
+              
+         }
+        }
+
+const newvehicle = new Vehicle();
+    
+console.log(newvehicle.getDetail());
+console.log(newvehicle);
+
+
+class Vehiclenew {
+
+    constructor(model){
+        this.model = model;
+    }
+            
+            getDetail(){
+                this.brand="toyota";   
+              
+         }
+        }
+
+const secondVegicle = new Vehiclenew("2022");
+    
+console.log(secondVegicle.getDetail());
+secondVegicle.getDetail();
+console.log(secondVegicle);
+
+
+        
+    </script>
+</body>
+</html>
