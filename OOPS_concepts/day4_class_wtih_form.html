@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form id="openaccount">
+         <input type="text" id="name"  placeholder="type name here.."></input>
+         <input type="number" id="balance"  placeholder="initial amount"></input>
+         <button  type="submit">create account</button>
+    </form>
+
+    <br />
+    <form id="depositeaccount">
+        <input type="number" id="accountnumer"  placeholder="account number here.."></input>
+        <input type="number" id="depositebalance"  placeholder="initial amount"></input>
+        <button  type="submit">deposite amount</button>
+   </form>
+
+    <script>
+    
+      let accountData = [];
+
+        class Bank {
+
+           constructor(name,balance){
+            this.name =name;
+            this.balance=balance;
+            this.accountNumber=Date.now();
+           }
+
+           deposite(newbalance){
+
+            this.balance  = JSON.parse(this.balance) +  JSON.parse(newbalance);
+            // this.balance += newbalance;
+           }
+
+
+        }
+
+          const name = document.getElementById("name");
+          const balance = document.getElementById("balance");
+          const forminfo = document.getElementById("openaccount");
+          forminfo.addEventListener('submit',(e)=>{
+               e.preventDefault();
+               const newaccount = new Bank(name.value,balance.value);
+         
+               accountData.push(newaccount);
+               name.value = "";
+               balance.value="";
+               console.log(accountData);
+          })
+          
+          const accountnumer = document.getElementById('accountnumer');
+          const depositebalance = document.getElementById('depositebalance');
+          const depositeaccount = document.getElementById('depositeaccount');
+          depositeaccount.addEventListener('submit',(e)=>{
+            e.preventDefault();
+
+            for(let x of accountData){
+                if(x.accountNumber == accountnumer.value){
+                      x.deposite(depositebalance.value);
+                }
+            }
+             
+            console.log(accountData);
+          })
+
+
+
+        
+        
+    </script>
+    
+</body>
+</html>
