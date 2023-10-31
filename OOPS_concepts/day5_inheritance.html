@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- //topic =>inheritamce -->
+
+    <!-- class 1   1= methods
+ 
+
+    class 2 2 =methods    // class 1 inherit -->
+
+    <!-- 1) super keyword 
+    2) extends keyword -->
+
+    <script>
+        class Wheels {
+
+            constructor(wheel) {
+                this.wheel = wheel
+            }
+        }
+
+
+        class Car extends Wheels {
+
+            constructor(name, engine, wheel) {
+                super(wheel)
+                this.name = name;
+                this.engine = engine;
+
+            }
+
+            showDetiail() {
+                return 'this is ' + this.name + 'and engine is of' + this.engine + 'cc';
+            }
+        }
+
+
+
+
+        class Cardetail extends Car {
+            constructor(year, name, engine, wheel) {
+                super(name, engine, wheel);
+                this.year = year;
+            }
+
+            showManufturingYear() {
+                return this.year
+            }
+        }
+
+
+        const cardetail = new Cardetail("2023", "Tata", "1200cc", "4");
+
+        console.log(cardetail)
+
+
+
+    </script>
+</body>
+
+</html>
