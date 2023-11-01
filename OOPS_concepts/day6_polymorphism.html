@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- Polymorphism -->
+
+       <!-- poly   = many
+       morphism = forms  -->
+
+       <script>
+
+        
+        class A {
+            add(){
+                console.log("helo this is A class")
+            }
+        }
+
+        class B  extends A {
+           
+           add(){
+            console.log("hello this is B")
+           }
+
+           callAmethod(){
+            super.add()
+           }
+        }
+
+        // class C extends B {
+           
+        // }
+
+       const b = new B();
+       b.add();
+       b.callAmethod();
+
+        // const c = new C();
+        // c.add();
+       </script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+    
+
+        class Person {
+
+            email="";
+            balance=0;
+              
+            constructor(name,address,age){
+                 this.name = name;
+                 this.address=address;
+                 this.age=age;
+                 this.accountnumber =Date.now();
+            }
+
+            addEmail(emialval){
+                this.email = emialval;
+            }
+            deposite(amount){
+              this.balance = this.balance + amount;
+            }
+        }
+
+        const personone  =  new Person("Pranav","pune",25);
+        console.log(personone);
+        personone.addEmail("pranv@gmail.com")
+
+        console.log(personone);
+        // after two  days
+
+        personone.deposite(3000);
+
+    </script>
+</body>
+</html>
