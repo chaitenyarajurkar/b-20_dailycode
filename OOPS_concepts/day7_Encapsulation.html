@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Encapsulation  ==>> hiding internal details  (hiding variables and methods)
+         
+        class Bank {
+            accountname;
+            #balance;
+            accountNumber;
+            constructor(accname,balance,accountNumber){
+                this.accountname = accname;
+                this.accountNumber=accountNumber;
+                this.#balance = balance;
+            }
+
+            getBalance(){
+                return this.#balance
+            }
+            deposite(amount){
+              this.#balance = this.#balance + amount;
+            }
+
+            #getLoan(){
+                console.log("yes loan is approved")
+            }
+
+
+            getLOanApprovedetail(){
+                this.#getLoan()
+            }
+        }
+
+        const accone = new Bank('pranav',2000,'875845787845748748574');
+        console.log(accone.getBalance())
+        accone.deposite(2000);
+        console.log(accone.getBalance());
+        accone.getLOanApprovedetail()
+        // console.log()
+
+          //logic
+
+
+
+          let obj ={
+            name:"pranv",
+            address:"pune",
+            getDetail:function(){
+                return `hello my name is ${this.name} and my addres is ${this.address}`
+            },
+            getArgs:function(){
+                return {...arguments};
+                // logic
+                // then return
+            }
+         }
+         
+         console.log(obj.getDetail());
+         console.log(obj.getArgs("code","first","pune"));
+
+    </script>
+</body>
+</html>
