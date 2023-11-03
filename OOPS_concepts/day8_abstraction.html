@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//   Abstraction >>  It is a way of hiding functionality   , we cannont create an instance of abtract class 
+            
+// 1)class  
+// 2)constructor function 
+
+
+ 
+    // if(50 !== 50){
+    //      console.log("it it not going to throw error")
+    // }else{
+    //      console.log("here")
+    //     throw new Error("condtion2 fail")
+    // }
+
+
+    const studentInfo = {
+        name:"pranav",
+        address:"mumbai"
+    }
+
+
+    const copyStudentInfoandUpfdate = Object.create(studentInfo);
+    copyStudentInfoandUpfdate.email="fddfdfd@dgc.om"
+    console.log(copyStudentInfoandUpfdate)
+ 
+
+
+  function General(){
+    this.name;
+    this.address;
+    throw new Error("you cannot create an instance of this class")
+}
+
+General.prototype.showName=function(){
+    return this.name;
+}
+
+
+
+function Student(name,address){
+  this.name=name;
+  this.address=address;
+}
+
+Student.prototype = Object.create(General.prototype)
+const stud = new Student("shubham","pune");
+console.log(stud.showName());
+
+//class example
+
+class INstruction{
+      height;
+     constructor(){
+        throw new Error("you cannot create an instance of this class")
+     }
+}
+
+
+const ins = new INstruction();
+
+    </script>
+</body>
+</html>
