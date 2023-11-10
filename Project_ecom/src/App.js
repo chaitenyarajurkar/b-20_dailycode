@@ -1,10 +1,35 @@
 import './App.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Navbarecom from './Component/Navbar/Navbar';
+import { BrowserRouter } from 'react-router-dom';
 function App() {
   return (
     <div className='container-fliud'>
-    <Navbarecom></Navbarecom>
+     <BrowserRouter>
+       <Navbarecom></Navbarecom>
+     
+     </BrowserRouter>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <h1 className='text-center'>Hello world</h1>
 
           <Accordion defaultActiveKey="0">
