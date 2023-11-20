@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getMobileData } from '../../other/common';
+import axios from 'axios';
 
 // url get tyep   for mobile    https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=1
 
@@ -52,8 +53,37 @@ const Mobile = () => {
 // obj.quantity = obj.quantity +1
 
 
-const addToCart=(item)=>{
+const addToCart= async(item)=>{
      console.log(item,new Date());
+
+    //  https://onlinetestapi.gerasim.in/api/Ecomm/AddToCart'  type: post
+
+    // {
+    //     "CartId": 0,  not mandtory
+    //     "CustId": 0,    ls
+    //     "ProductId": 0, product itm
+    //     "Quantity": 0, product itm 
+    //     "AddedDate": "2023-11-20T15:02:00.603Z"
+    //   }
+
+    try {
+        const useinfo_ls = localStorage.getItem("userInfo");
+        const getCustId = JSON.parse(useinfo_ls);
+    
+        let obj = {
+            "CustId":getCustId.custId,
+            "ProductId": item.productId, 
+            "Quantity": item.quantity,
+            "AddedDate": new Date()
+        }
+        
+        const response = await axios.post("https://onlinetestapi.gerasim.in/api/Ecomm/AddToCart",obj);
+
+        console.log(">>>add to cart",response);
+
+    } catch (error) {
+        console.log(error)
+    }
 }
     return (
         <div className='container'>
@@ -72,7 +102,7 @@ const addToCart=(item)=>{
                                <button type="button" class="btn btn-secondary">{item.quantity ? item.quantity : 0}</button>
                                <button type="button" class="btn btn-secondary">-</button>
                            </div>
-                               <button disabled={true} className="btn btn-primary" onClick={()=>addToCart(item)}>Add to cart</button>
+                               <button className="btn btn-primary" onClick={()=>addToCart(item)}>Add to cart</button>
                            </>
                            }
                            </div>
