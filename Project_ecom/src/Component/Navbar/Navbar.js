@@ -1,35 +1,22 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useContext, useEffect, useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
 import { getData } from '../../other/common';
-
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Appcontext } from '../../App';
 const Navbarecom = () => {
-
+ const cartNumb = useContext(Appcontext)
+ console.log(cartNumb);
   const [navData, setNavData] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
 
   const [currentPath, setCurrentPath] = useState("")
-const [cartNumber,setCartNumber] = useState(0);
 
-  const getCartNumber = async () => {
-    try {
-      const res = await axios.get('https://onlinetestapi.gerasim.in/api/Ecomm/GetCartProductsByCustomerId?id=30');
-      console.log(res.data.data)
-      const cartArray = res.data.data
-      setCartNumber(cartArray.length);
-    } catch (error) {
-    }
-  }
 
   useEffect(() => {
     const userInfo = localStorage.getItem("userInfo");
     if (userInfo !== null) {
       setIsLogin(true);
-      getCartNumber();
     }
     const urlString = window.location.href;
     const url = new URL(urlString);
@@ -73,7 +60,7 @@ const [cartNumber,setCartNumber] = useState(0);
 
           })}
 
-          <Nav.Link as={Link} to="/" >Cart<sup>{cartNumber}</sup></Nav.Link>
+          <Nav.Link as={Link} to="/" >Cart<sup>{cartNumb.cartNum}</sup></Nav.Link>
         </Nav>
         <Nav className="ml-auto">
           {!isLogin && <>

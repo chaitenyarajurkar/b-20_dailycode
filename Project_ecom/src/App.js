@@ -7,9 +7,25 @@ import Tablet from './Component/Tablet/Tablet';
 import Login from './Component/Login/Login';
 import Signup from './Component/Signup/Signup';
 import Dashboard from './Component/Dashboard/Dashboard';
+import { createContext, useState } from 'react';
+import axios from 'axios';
+
+const Appcontext = createContext();
 function App() {
+  const [cartNumber,setCartNumber] = useState(0);
+
+  const getCartNumber = async () => {
+    try {
+      const res = await axios.get('https://onlinetestapi.gerasim.in/api/Ecomm/GetCartProductsByCustomerId?id=30');
+      console.log(res.data.data)
+      const cartArray = res.data.data
+      setCartNumber(cartArray.length);
+    } catch (error) {
+    }
+  }
   return (
     <div className='container-fliud'>
+      <Appcontext.Provider  value={{cartNum:cartNumber,getCartNum:getCartNumber}}>
      <BrowserRouter>
        <Navbarecom></Navbarecom>
        <Routes>
@@ -21,8 +37,10 @@ function App() {
        </Routes>
      
      </BrowserRouter>
+     </Appcontext.Provider>
     </div>
   );
 }
 
 export default App;
+export {Appcontext};

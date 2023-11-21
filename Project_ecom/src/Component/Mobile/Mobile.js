@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getMobileData } from '../../other/common';
 import axios from 'axios';
+import { Appcontext } from '../../App';
 
 // url get tyep   for mobile    https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=1
 
@@ -13,11 +14,14 @@ import axios from 'axios';
 // for monitor    https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=5
 
 const Mobile = () => {
+    const cartNumb = useContext(Appcontext)
+    console.log(cartNumb);
 
     const useInfo = localStorage.getItem("userInfo");
     console.log(useInfo);
     const [mobileData,setMobileData] = useState([]);
     const [qty,setQty] = useState(0);
+    
     useEffect(()=>{
       getMobileData().then((data)=>{
         setMobileData(data);
@@ -81,10 +85,18 @@ const addToCart= async(item)=>{
 
         console.log(">>>add to cart",response);
 
+        cartNumb.getCartNum();
+
+
+
+
     } catch (error) {
         console.log(error)
     }
 }
+
+
+
     return (
         <div className='container'>
             <div className='row'>
