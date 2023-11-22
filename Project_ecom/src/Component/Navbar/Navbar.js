@@ -10,18 +10,17 @@ const Navbarecom = () => {
   const [navData, setNavData] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
 
-  const [currentPath, setCurrentPath] = useState("")
+ 
 
 
   useEffect(() => {
+    
     const userInfo = localStorage.getItem("userInfo");
     if (userInfo !== null) {
       setIsLogin(true);
     }
-    const urlString = window.location.href;
-    const url = new URL(urlString);
-    console.log(url.pathname);
-    setCurrentPath(url.pathname);
+   
+    cartNumb.setActiveTb()
 
     getData().then((data) => {
       // data   47 data
@@ -32,7 +31,8 @@ const Navbarecom = () => {
   }, [])
 
   const setActiveTAB = (path) => {
-    setCurrentPath(path)
+    debugger
+    cartNumb.setActiveTb(path)
 
   }
 
@@ -55,7 +55,7 @@ const Navbarecom = () => {
         <Nav className="me-auto">
           {navData.slice(0, 5).map((item, index) => {
             return (
-              <Nav.Link as={Link} to={item.categoryName} onClick={() => setActiveTAB(item.categoryName)} style={currentPath.indexOf(item.categoryName) > -1 ? { color: "red" } : {}}>{item.categoryName}</Nav.Link>
+              <Nav.Link as={Link} to={item.categoryName} onClick={() => setActiveTAB(item.categoryName)} style={cartNumb.curntPath.indexOf(item.categoryName) > -1 ? { color: "red" } : {}}>{item.categoryName}</Nav.Link>
             )
 
           })}

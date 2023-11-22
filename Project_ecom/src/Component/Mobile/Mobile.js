@@ -23,6 +23,7 @@ const Mobile = () => {
     const [qty,setQty] = useState(0);
     
     useEffect(()=>{
+        cartNumb.setActiveTb('Mobile')
       getMobileData().then((data)=>{
         setMobileData(data);
 

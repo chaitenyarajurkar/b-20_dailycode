@@ -13,19 +13,33 @@ import axios from 'axios';
 const Appcontext = createContext();
 function App() {
   const [cartNumber,setCartNumber] = useState(0);
-
+  const [currentPath, setCurrentPath] = useState("")
   const getCartNumber = async () => {
     try {
-      const res = await axios.get('https://onlinetestapi.gerasim.in/api/Ecomm/GetCartProductsByCustomerId?id=30');
+      const ls = localStorage.getItem('userInfo');
+      const userinfo = JSON.parse(ls);
+      const res = await axios.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetCartProductsByCustomerId?id=${userinfo.custId}`);
       console.log(res.data.data)
       const cartArray = res.data.data
       setCartNumber(cartArray.length);
     } catch (error) {
     }
   }
+  const setActiveTab=(pathNamefromNavbar)=>{
+    const urlString = window.location.href;
+    const url = new URL(urlString);
+    console.log(url.pathname);
+    if(pathNamefromNavbar){
+      setCurrentPath(pathNamefromNavbar);
+
+    }else{
+      setCurrentPath(url.pathname);
+    }
+    debugger
+  }
   return (
     <div className='container-fliud'>
-      <Appcontext.Provider  value={{cartNum:cartNumber,getCartNum:getCartNumber}}>
+      <Appcontext.Provider  value={{cartNum:cartNumber,getCartNum:getCartNumber,curntPath:currentPath,setActiveTb:setActiveTab}}>
      <BrowserRouter>
        <Navbarecom></Navbarecom>
        <Routes>
