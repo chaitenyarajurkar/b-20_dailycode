@@ -9,10 +9,11 @@ import Signup from './Component/Signup/Signup';
 import Dashboard from './Component/Dashboard/Dashboard';
 import { createContext, useState } from 'react';
 import axios from 'axios';
+import CartPage from './other/CartPage';
 
 const Appcontext = createContext();
 function App() {
-  const [cartNumber,setCartNumber] = useState(0);
+  const [cartData,setCartData] = useState([]);
   const [currentPath, setCurrentPath] = useState("")
   const getCartNumber = async () => {
     try {
@@ -21,7 +22,7 @@ function App() {
       const res = await axios.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetCartProductsByCustomerId?id=${userinfo.custId}`);
       console.log(res.data.data)
       const cartArray = res.data.data
-      setCartNumber(cartArray.length);
+      setCartData(cartArray);
     } catch (error) {
     }
   }
@@ -39,7 +40,7 @@ function App() {
   }
   return (
     <div className='container-fliud'>
-      <Appcontext.Provider  value={{cartNum:cartNumber,getCartNum:getCartNumber,curntPath:currentPath,setActiveTb:setActiveTab}}>
+      <Appcontext.Provider  value={{cartDatainfo:cartData,getCartNum:getCartNumber,curntPath:currentPath,setActiveTb:setActiveTab}}>
      <BrowserRouter>
        <Navbarecom></Navbarecom>
        <Routes>
@@ -48,6 +49,7 @@ function App() {
         <Route path='/Tablet' element={<Tablet></Tablet>}></Route>
         <Route path='/Login' element={<Login></Login>}></Route>
         <Route path='/Signup' element={<Signup></Signup>}></Route>
+        <Route path='/cartpage' element={<CartPage></CartPage>}></Route>
        </Routes>
      
      </BrowserRouter>

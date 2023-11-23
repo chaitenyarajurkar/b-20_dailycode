@@ -20,3 +20,20 @@ const getData = async () => {
     }
   }
   export {getData,getMobileData};
+
+
+
+
+
+  // {
+  //   "ProductId": 0,
+  //   "ProductSku": "string",   text
+  //   "ProductName": "string",  text
+  //   "ProductPrice": 0,    number
+  //   "ProductShortName": "string",  text
+  //   "ProductDescription": "string",  textarea
+  //   "CreatedDate": "2023-11-23T15:24:48.112Z",  send it while submit
+  //   "DeliveryTimeSpan": "string",   dropdown 
+  //   "CategoryId": 0,   dropdown
+  //   "ProductImageUrl": "https://m.media-amazon.com/images/I/51abfjjJj7L._SX569_.jpg"  text field
+  // }

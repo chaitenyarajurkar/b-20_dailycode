@@ -19,8 +19,9 @@ const Navbarecom = () => {
     if (userInfo !== null) {
       setIsLogin(true);
     }
+    cartNumb.setActiveTb();
+    cartNumb.getCartNum();
    
-    cartNumb.setActiveTb()
 
     getData().then((data) => {
       // data   47 data
@@ -60,7 +61,7 @@ const Navbarecom = () => {
 
           })}
 
-          <Nav.Link as={Link} to="/" >Cart<sup>{cartNumb.cartNum}</sup></Nav.Link>
+          <Nav.Link as={Link} to="/cartpage" onClick={() => setActiveTAB("cartpage")}  style={cartNumb.curntPath.indexOf("cartpage") > -1 ? { color: "red" } : {}}>Cart<sup>{cartNumb.cartDatainfo?.length}</sup></Nav.Link>
         </Nav>
         <Nav className="ml-auto">
           {!isLogin && <>
