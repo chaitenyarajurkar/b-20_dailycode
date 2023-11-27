@@ -37,3 +37,11 @@ const getData = async () => {
   //   "CategoryId": 0,   dropdown
   //   "ProductImageUrl": "https://m.media-amazon.com/images/I/51abfjjJj7L._SX569_.jpg"  text field
   // }
+
+
+
+
+
+  
+// query prams for delte api
+  //   axios.get("url",{params:{id:productid}})

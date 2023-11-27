@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { getMobileData } from '../../other/common';
 import axios from 'axios';
 import { Appcontext } from '../../App';
+import HOC from '../../other/HOC';
 
 // url get tyep   for mobile    https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=1
 
@@ -127,4 +128,4 @@ const addToCart= async(item)=>{
     );
 };
 
-export default Mobile;
+export default HOC(Mobile);

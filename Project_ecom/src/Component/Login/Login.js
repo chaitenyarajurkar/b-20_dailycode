@@ -34,6 +34,18 @@ const Login = () => {
         setError(errorArray);
 
         if (errorArray.length <= 0) {
+
+            if(username === "admin" && paasword==="1234"){
+                //   adminlogic
+
+                localStorage.setItem("isAdmin",true);
+                alert("Login Succesfull");
+                window.location.href = "/";
+            }
+
+            else{
+
+           
             //api hit 
            let reqBdy ={
             "UserName":username,
@@ -58,6 +70,7 @@ const Login = () => {
             //   }
 
         }
+         }
     }
 
     const handleError = (value) => {

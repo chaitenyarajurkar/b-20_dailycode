@@ -10,6 +10,7 @@ import Dashboard from './Component/Dashboard/Dashboard';
 import { createContext, useState } from 'react';
 import axios from 'axios';
 import CartPage from './other/CartPage';
+import CreateProduct from './other/CreateProduct';
 
 const Appcontext = createContext();
 function App() {
@@ -50,6 +51,7 @@ function App() {
         <Route path='/Login' element={<Login></Login>}></Route>
         <Route path='/Signup' element={<Signup></Signup>}></Route>
         <Route path='/cartpage' element={<CartPage></CartPage>}></Route>
+        <Route path='/creatProduct' element={<CreateProduct></CreateProduct>}></Route>
        </Routes>
      
      </BrowserRouter>

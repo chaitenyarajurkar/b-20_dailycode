@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Appcontext } from '../../App';
+import HOC from '../../other/HOC';
 
 const Tablet = () => {
 
@@ -15,4 +16,4 @@ const Tablet = () => {
     );
 };
 
-export default Tablet;
+export default HOC(Tablet);

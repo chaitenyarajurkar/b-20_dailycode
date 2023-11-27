@@ -9,6 +9,7 @@ const Navbarecom = () => {
  console.log(cartNumb);
   const [navData, setNavData] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
+  const [isAdmin,setIsAdmin] = useState(false);
 
  
 
@@ -16,9 +17,15 @@ const Navbarecom = () => {
   useEffect(() => {
     
     const userInfo = localStorage.getItem("userInfo");
-    if (userInfo !== null) {
+    const isadmin = localStorage.getItem("isAdmin");
+    if (userInfo !== null || isAdmin) {
       setIsLogin(true);
     }
+
+    if(isadmin){
+      setIsAdmin(true);
+    }
+
     cartNumb.setActiveTb();
     cartNumb.getCartNum();
    
@@ -33,8 +40,11 @@ const Navbarecom = () => {
 
   const setActiveTAB = (path) => {
     debugger
+    const ls = localStorage.getItem("userInfo");
+    const userInfo = JSON.parse(ls);
+    if (userInfo !== null) {
     cartNumb.setActiveTb(path)
-
+    }
   }
 
 
@@ -62,6 +72,7 @@ const Navbarecom = () => {
           })}
 
           <Nav.Link as={Link} to="/cartpage" onClick={() => setActiveTAB("cartpage")}  style={cartNumb.curntPath.indexOf("cartpage") > -1 ? { color: "red" } : {}}>Cart<sup>{cartNumb.cartDatainfo?.length}</sup></Nav.Link>
+         {isAdmin && <Nav.Link as={Link} to="/creatProduct" onClick={() => setActiveTAB("creatProduct")}  style={cartNumb.curntPath.indexOf("creatProduct") > -1 ? { color: "red" } : {}}>Create Product</Nav.Link>}
         </Nav>
         <Nav className="ml-auto">
           {!isLogin && <>
