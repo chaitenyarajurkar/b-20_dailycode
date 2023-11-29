@@ -11,6 +11,7 @@ import { createContext, useState } from 'react';
 import axios from 'axios';
 import CartPage from './other/CartPage';
 import CreateProduct from './other/CreateProduct';
+import Monitor from './Component/Monitor_class/Monitor';
 
 const Appcontext = createContext();
 function App() {
@@ -47,6 +48,7 @@ function App() {
        <Routes>
         <Route path='/' element={<Dashboard></Dashboard>}></Route>
         <Route path='/Mobile' element={<Mobile></Mobile>}></Route>
+        <Route path='/Monitor' element={<Monitor favcol='blue'></Monitor>}></Route>
         <Route path='/Tablet' element={<Tablet></Tablet>}></Route>
         <Route path='/Login' element={<Login></Login>}></Route>
         <Route path='/Signup' element={<Signup></Signup>}></Route>
