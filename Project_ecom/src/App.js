@@ -12,6 +12,7 @@ import axios from 'axios';
 import CartPage from './other/CartPage';
 import CreateProduct from './other/CreateProduct';
 import Monitor from './Component/Monitor_class/Monitor';
+import ProductDetail from './other/ProductDetail';
 
 const Appcontext = createContext();
 function App() {
@@ -54,6 +55,7 @@ function App() {
         <Route path='/Signup' element={<Signup></Signup>}></Route>
         <Route path='/cartpage' element={<CartPage></CartPage>}></Route>
         <Route path='/creatProduct' element={<CreateProduct></CreateProduct>}></Route>
+        <Route path='/productDetail' element={<ProductDetail></ProductDetail>}></Route>
        </Routes>
      
      </BrowserRouter>

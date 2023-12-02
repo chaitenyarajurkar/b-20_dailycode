@@ -3,6 +3,7 @@ import { getMobileData } from '../../other/common';
 import axios from 'axios';
 import { Appcontext } from '../../App';
 import HOC from '../../other/HOC';
+import { useNavigate } from 'react-router-dom';
 
 // url get tyep   for mobile    https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=1
 
@@ -17,6 +18,7 @@ import HOC from '../../other/HOC';
 const Mobile = () => {
     const cartNumb = useContext(Appcontext)
     console.log(cartNumb);
+    const navigate = useNavigate();
 
     const useInfo = localStorage.getItem("userInfo");
     console.log(useInfo);
@@ -97,7 +99,10 @@ const addToCart= async(item)=>{
     }
 }
 
+const openProduct=(product)=>{
 
+    navigate(`/productDetail?id=${product.productId}`,{state:product});
+}
 
     return (
         <div className='container'>
@@ -105,7 +110,7 @@ const addToCart= async(item)=>{
            {mobileData.length > 0 && mobileData.map((item,index)=>{
                return (
                    <div className="card col-4 mx-2" style={{width: "18rem"}}>
-                       <img className="card-img-top" src={item.productImageUrl} alt="Card  cap" />
+                       <img className="card-img-top" src={item.productImageUrl} alt="Card  cap" onClick={()=>openProduct(item)} />
                            <div className="card-body">
                                <h5 className="card-title">{item.productName}</h5>
                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
