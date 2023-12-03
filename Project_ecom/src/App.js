@@ -13,6 +13,7 @@ import CartPage from './other/CartPage';
 import CreateProduct from './other/CreateProduct';
 import Monitor from './Component/Monitor_class/Monitor';
 import ProductDetail from './other/ProductDetail';
+import CartPageclass from './other/CartPageclass';
 
 const Appcontext = createContext();
 function App() {
@@ -41,9 +42,13 @@ function App() {
     }
     debugger
   }
+
+  const showAlert=()=>{
+    alert("hello world")
+  }
   return (
     <div className='container-fliud'>
-      <Appcontext.Provider  value={{cartDatainfo:cartData,getCartNum:getCartNumber,curntPath:currentPath,setActiveTb:setActiveTab}}>
+      <Appcontext.Provider  value={{cartDatainfo:cartData,getCartNum:getCartNumber,curntPath:currentPath,setActiveTb:setActiveTab,showAlertcall:showAlert}}>
      <BrowserRouter>
        <Navbarecom></Navbarecom>
        <Routes>
@@ -56,6 +61,7 @@ function App() {
         <Route path='/cartpage' element={<CartPage></CartPage>}></Route>
         <Route path='/creatProduct' element={<CreateProduct></CreateProduct>}></Route>
         <Route path='/productDetail' element={<ProductDetail></ProductDetail>}></Route>
+        <Route path='/cartnew' element={<CartPageclass></CartPageclass>}></Route>
        </Routes>
      
      </BrowserRouter>
