@@ -1,14 +1,17 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import Label from '../UI/Label/Label';
+import Text from '../UI/Text/Text';
 
 const Login = () => {
 
 
     const [formData, setFormData] = useState({
-        username: "", paasword: ""
+        username: "", paasword: "",email:""
     })
    const [eror,setError] = useState([]);
     const onChangeHandler = (fieldname, value) => {
+        debugger
         setFormData(prev => ({ ...prev, [fieldname]: value }));
     }
     const submitHandler = async(e) => {
@@ -84,7 +87,7 @@ const Login = () => {
 
             <form onSubmit={(e) => submitHandler(e)}>
                 <div className="form-group mt-2">
-                    <label for="exampleInputEmail1 mt-1">UserName</label>
+                    <Label labelName="User Name"></Label>
                     <input type="text" value={formData.username} onChange={(e) => onChangeHandler("username", e.target.value)}
                         class={ handleError("username") ? "form-control is-invalid" : "form-control"} id="exampleInputEmail1" placeholder="Enter UserName" />
                    { handleError("username") && <div className="invalid-feedback">
@@ -92,7 +95,7 @@ const Login = () => {
                     </div>}
                 </div>
                 <div className="form-group mt-2">
-                    <label for="exampleInputPassword1 mt-1">UserPassword</label>
+                <Label labelName="User Paasword"></Label>
                     <input type="password" value={formData.paasword} onChange={(e) => onChangeHandler("paasword", e.target.value)}
                        class={ handleError("paasword") ? "form-control is-invalid" : "form-control"} id="exampleInputPassword1" placeholder="Password" />
                    {handleError("paasword") &&  <div className="invalid-feedback">
@@ -101,6 +104,14 @@ const Login = () => {
                 </div>
 
                 <button type="submit" className="btn btn-primary mt-2">Submit</button>
+
+                <div className="form-group mt-2">
+                    <Label labelName="Email"></Label>
+                    <Text type="email"  value={formData.email}  placeholder="please enter email "
+                       onChange={onChangeHandler} fieldname="email"
+                    ></Text>
+                    
+                </div>
             </form>
         </div>
     );

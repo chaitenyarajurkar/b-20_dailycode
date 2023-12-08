@@ -1,5 +1,6 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
+import './dashboard.css'
 const Dashboard = () => {
     return (
         <div>
@@ -32,6 +33,15 @@ culpa qui officia deserunt mollit anim id est laborum.
 </Accordion.Body>
 </Accordion.Item>
 </Accordion>
+
+
+<div>
+<div class="dd">
+  <div class="left"> fdfddddddddddddddddddddddddddddddddddddddddddddddddffd</div>
+  <div class="right">fdfdsdsdddddddddddff</div>
+</div>
+
+</div>
         </div>
     );
 };
