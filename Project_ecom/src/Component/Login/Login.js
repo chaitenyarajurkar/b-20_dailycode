@@ -2,17 +2,23 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import Label from '../UI/Label/Label';
 import Text from '../UI/Text/Text';
+import Select from '../UI/Select/Select';
 
 const Login = () => {
 
 
     const [formData, setFormData] = useState({
-        username: "", paasword: "",email:""
+        username: "", paasword: "", dropvalue:""
+        // ,email:""
     })
    const [eror,setError] = useState([]);
+
+   
     const onChangeHandler = (fieldname, value) => {
         debugger
         setFormData(prev => ({ ...prev, [fieldname]: value }));
+
+        //LOGIC KI KITNI FIELDS EMPTY HAI
     }
     const submitHandler = async(e) => {
         e.preventDefault();
@@ -37,7 +43,7 @@ const Login = () => {
         setError(errorArray);
 
         if (errorArray.length <= 0) {
-
+            //  LOADERfLAG TRUE
             if(username === "admin" && paasword==="1234"){
                 //   adminlogic
 
@@ -81,6 +87,7 @@ const Login = () => {
       return  eror.indexOf(value) > -1 ? true : false;
    }
      
+   const optionArray = ["item1","item2","item3"];
 
     return (
         <div className='container offset-3 col-6 pt-3'>
@@ -88,30 +95,31 @@ const Login = () => {
             <form onSubmit={(e) => submitHandler(e)}>
                 <div className="form-group mt-2">
                     <Label labelName="User Name"></Label>
-                    <input type="text" value={formData.username} onChange={(e) => onChangeHandler("username", e.target.value)}
-                        class={ handleError("username") ? "form-control is-invalid" : "form-control"} id="exampleInputEmail1" placeholder="Enter UserName" />
-                   { handleError("username") && <div className="invalid-feedback">
-                        Please provide a valid city.
-                    </div>}
+                    <Text type="text" value={formData.username} placeholder="please enter username "
+                        onChange={onChangeHandler} fieldname="username"
+                        handleError={handleError("username")}
+                    ></Text>
                 </div>
                 <div className="form-group mt-2">
-                <Label labelName="User Paasword"></Label>
-                    <input type="password" value={formData.paasword} onChange={(e) => onChangeHandler("paasword", e.target.value)}
-                       class={ handleError("paasword") ? "form-control is-invalid" : "form-control"} id="exampleInputPassword1" placeholder="Password" />
-                   {handleError("paasword") &&  <div className="invalid-feedback">
-                        Please provide a valid city.
-                    </div>}
+                    <Label labelName="Password"></Label>
+                    <Text type="password" value={formData.paasword} placeholder="please enter password "
+                        onChange={onChangeHandler} fieldname="paasword"
+                        handleError={handleError("paasword")}
+                    ></Text>
                 </div>
 
                 <button type="submit" className="btn btn-primary mt-2">Submit</button>
 
+
                 <div className="form-group mt-2">
-                    <Label labelName="Email"></Label>
-                    <Text type="email"  value={formData.email}  placeholder="please enter email "
-                       onChange={onChangeHandler} fieldname="email"
-                    ></Text>
-                    
-                </div>
+                    <Label labelName="Drop Down"></Label>
+                    <Select value={formData.dropvalue} fieldname="dropvalue" 
+                     options={optionArray} onChangeHandler={onChangeHandler}
+                     handleError={handleError("dropvalue")}
+                    ></Select>
+                    </div>
+
+
             </form>
         </div>
     );
