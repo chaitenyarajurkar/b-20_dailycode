@@ -39,7 +39,6 @@ const Navbarecom = () => {
   }, [])
 
   const setActiveTAB = (path) => {
-    debugger
     const ls = localStorage.getItem("userInfo");
     const userInfo = JSON.parse(ls);
     if (userInfo !== null) {

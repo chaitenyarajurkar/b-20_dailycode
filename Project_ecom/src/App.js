@@ -7,14 +7,18 @@ import Tablet from './Component/Tablet/Tablet';
 import Login from './Component/Login/Login';
 import Signup from './Component/Signup/Signup';
 import Dashboard from './Component/Dashboard/Dashboard';
-import { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import axios from 'axios';
 import CartPage from './other/CartPage';
-import CreateProduct from './other/CreateProduct';
+// import CreateProduct from './other/CreateProduct';
 import Monitor from './Component/Monitor_class/Monitor';
-import ProductDetail from './other/ProductDetail';
-import CartPageclass from './other/CartPageclass';
-
+// import ProductDetail from './other/ProductDetail';
+// import CartPageclass from './other/CartPageclass';
+const LazyCart = React.lazy(()=>import('./other/CartPage'));
+const LazyProductDetail = React.lazy(()=>import('./other/ProductDetail'));
+const LazySignup = React.lazy(()=>import('./Component/Signup/Signup'));
+const LazyCartClass = React.lazy(()=>import('./other/CartPageclass'));
+const LazyCreateProduct = React.lazy(()=>import('./other/CreateProduct'))
 const Appcontext = createContext();
 function App() {
   const [cartData,setCartData] = useState([]);
@@ -40,7 +44,7 @@ function App() {
     }else{
       setCurrentPath(url.pathname);
     }
-    debugger
+    
   }
 
   const showAlert=()=>{
@@ -57,11 +61,11 @@ function App() {
         <Route path='/Monitor' element={<Monitor favcol='blue'></Monitor>}></Route>
         <Route path='/Tablet' element={<Tablet></Tablet>}></Route>
         <Route path='/Login' element={<Login></Login>}></Route>
-        <Route path='/Signup' element={<Signup></Signup>}></Route>
-        <Route path='/cartpage' element={<CartPage></CartPage>}></Route>
-        <Route path='/creatProduct' element={<CreateProduct></CreateProduct>}></Route>
-        <Route path='/productDetail' element={<ProductDetail></ProductDetail>}></Route>
-        <Route path='/cartnew' element={<CartPageclass></CartPageclass>}></Route>
+        <Route path='/Signup' element={<React.Suspense><LazySignup /></React.Suspense>}></Route>
+        <Route path='/cartpage' element={<React.Suspense><LazyCart /></React.Suspense>}></Route>
+        <Route path='/creatProduct' element={<React.Suspense><LazyCreateProduct /></React.Suspense>}></Route>
+        <Route path='/productDetail' element={<React.Suspense><LazyProductDetail /></React.Suspense>}></Route>
+        <Route path='/cartnew' element={<React.Suspense><LazyCartClass /></React.Suspense>}></Route>
        </Routes>
      
      </BrowserRouter>

@@ -19,7 +19,25 @@ const getData = async () => {
     } catch (error) {
     }
   }
-  export {getData,getMobileData};
+
+  const getTabletData = async () => {
+    try {
+      const response = await axios.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=3`);
+      console.log(response.data.data);
+      return response.data.data;
+    } catch (error) {
+    }
+  }
+
+  const getCameraData = async () => {
+    try {
+      const response = await axios.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=2`);
+      console.log(response.data.data);
+      return response.data.data;
+    } catch (error) {
+    }
+  }
+  export {getData,getMobileData,getCameraData,getTabletData};
 
 
 

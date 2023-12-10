@@ -15,7 +15,6 @@ const Login = () => {
 
    
     const onChangeHandler = (fieldname, value) => {
-        debugger
         setFormData(prev => ({ ...prev, [fieldname]: value }));
 
         //LOGIC KI KITNI FIELDS EMPTY HAI

@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Appcontext } from '../../App';
-import HOC from '../../other/HOC';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { getMobileData, getTabletData } from '../../other/common';
+import { Appcontext } from '../../App';
+import { getCameraData } from '../../other/common';
+import axios from 'axios';
 
-const Tablet = () => {
-
+const Camera = () => {
     const cartNumb = useContext(Appcontext)
     console.log(cartNumb);
     const navigate = useNavigate();
@@ -17,8 +15,8 @@ const Tablet = () => {
     const [qty,setQty] = useState(0);
     
     useEffect(()=>{
-        cartNumb.setActiveTb('Tablet')
-      getTabletData().then((data)=>{
+        cartNumb.setActiveTb('Camera')
+      getCameraData().then((data)=>{
         setMobileData(data);
 
      });
@@ -123,4 +121,4 @@ const openProduct=(product)=>{
     );
 };
 
-export default HOC(Tablet);
+export default Camera;
