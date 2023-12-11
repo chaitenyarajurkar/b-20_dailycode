@@ -22,7 +22,8 @@ const LazyCreateProduct = React.lazy(()=>import('./other/CreateProduct'))
 const Appcontext = createContext();
 function App() {
   const [cartData,setCartData] = useState([]);
-  const [currentPath, setCurrentPath] = useState("")
+  const [currentPath, setCurrentPath] = useState("");
+  const [mobileData,setMobileData] = useState([]);
   const getCartNumber = async () => {
     try {
       const ls = localStorage.getItem('userInfo');
@@ -50,9 +51,32 @@ function App() {
   const showAlert=()=>{
     alert("hello world")
   }
+
+  const setDataInMobile =(mobdata)=>{
+    setMobileData(mobdata)
+  }
+
+  const increMent=(index)=>{
+    // setQty(qty+1);
+    // console.log(index,mobileData[index]);
+
+    setMobileData(prevState=>{
+        let updateMobileData = prevState.map((item,ind)=>{
+            if(ind === index){
+                let quantity = item.quantity ?  item.quantity +1 : 1;
+                return {...item,quantity:quantity}
+            }else{
+                return {...item};
+            }
+
+        })
+        return updateMobileData
+    })
+      
+   }
   return (
     <div className='container-fliud'>
-      <Appcontext.Provider  value={{cartDatainfo:cartData,getCartNum:getCartNumber,curntPath:currentPath,setActiveTb:setActiveTab,showAlertcall:showAlert}}>
+      <Appcontext.Provider  value={{increMentMobile:increMent,mobileDataInfo:mobileData,setDataMobile:setDataInMobile,cartDatainfo:cartData,getCartNum:getCartNumber,curntPath:currentPath,setActiveTb:setActiveTab,showAlertcall:showAlert}}>
      <BrowserRouter>
        <Navbarecom></Navbarecom>
        <Routes>
@@ -76,3 +100,14 @@ function App() {
 
 export default App;
 export {Appcontext};
+
+
+
+// const [globalObj,setGlobalObj] = useState({
+
+//   mobileData:[],
+//   cameraData:[],
+//   tabletData:[],
+//   laptopData:[],
+
+// })

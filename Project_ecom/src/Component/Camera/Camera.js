@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const Camera = () => {
     const cartNumb = useContext(Appcontext)
-    console.log(cartNumb);
+    console.log("camera");
     const navigate = useNavigate();
 
     const useInfo = localStorage.getItem("userInfo");

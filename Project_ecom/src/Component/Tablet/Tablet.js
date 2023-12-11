@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { getMobileData, getTabletData } from '../../other/common';
 
 const Tablet = () => {
-
+    console.log("Tablet");
     const cartNumb = useContext(Appcontext)
     console.log(cartNumb);
     const navigate = useNavigate();

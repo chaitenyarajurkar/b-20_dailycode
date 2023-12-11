@@ -17,7 +17,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Mobile = () => {
     const cartNumb = useContext(Appcontext)
-    console.log(cartNumb);
+    console.log("Mobile");
+    debugger
     const navigate = useNavigate();
 
     const useInfo = localStorage.getItem("userInfo");
@@ -27,15 +28,19 @@ const Mobile = () => {
     
     useEffect(()=>{
         cartNumb.setActiveTb('Mobile')
-      getMobileData().then((data)=>{
-        setMobileData(data);
+      if(cartNumb.mobileDataInfo.length === 0){
 
-     });
+          getMobileData().then((data)=>{
+            // setMobileData(data);
+            cartNumb.setDataMobile(data)
+    
+         });
+      }
     },[])
 
    const increMent=(index)=>{
     // setQty(qty+1);
-    console.log(index,mobileData[index]);
+    // console.log(index,mobileData[index]);
 
     setMobileData(prevState=>{
         let updateMobileData = prevState.map((item,ind)=>{
@@ -107,7 +112,7 @@ const openProduct=(product)=>{
     return (
         <div className='container'>
             <div className='row'>
-           {mobileData.length > 0 && mobileData.map((item,index)=>{
+           {cartNumb.mobileDataInfo.length > 0 && cartNumb.mobileDataInfo.map((item,index)=>{
                return (
                    <div className="card col-4 mx-2" style={{width: "18rem"}}>
                        <img className="card-img-top" src={item.productImageUrl} alt="Card  cap" onClick={()=>openProduct(item)} />
@@ -117,7 +122,7 @@ const openProduct=(product)=>{
                               
 
                            {useInfo !==null &&<>  <div class="btn-group" role="group" aria-label="Basic example">
-                               <button type="button" onClick={() => increMent(index)} class="btn btn-secondary">+</button>
+                               <button type="button" onClick={() => cartNumb.increMentMobile(index)} class="btn btn-secondary">+</button>
                                <button type="button" class="btn btn-secondary">{item.quantity ? item.quantity : 0}</button>
                                <button type="button" class="btn btn-secondary">-</button>
                            </div>
