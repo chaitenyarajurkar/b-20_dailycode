@@ -12,6 +12,7 @@ import axios from 'axios';
 import CartPage from './other/CartPage';
 // import CreateProduct from './other/CreateProduct';
 import Monitor from './Component/Monitor_class/Monitor';
+import Camera from './Component/Camera/Camera';
 // import ProductDetail from './other/ProductDetail';
 // import CartPageclass from './other/CartPageclass';
 const LazyCart = React.lazy(()=>import('./other/CartPage'));
@@ -23,7 +24,14 @@ const Appcontext = createContext();
 function App() {
   const [cartData,setCartData] = useState([]);
   const [currentPath, setCurrentPath] = useState("");
-  const [mobileData,setMobileData] = useState([]);
+  const [globalObj,setGlobalObj] = useState({
+  mobileData:[],
+  cameraData:[],
+  tabletData:[],
+  laptopData:[],
+  monitorData:[]
+
+})
   const getCartNumber = async () => {
     try {
       const ls = localStorage.getItem('userInfo');
@@ -52,36 +60,31 @@ function App() {
     alert("hello world")
   }
 
-  const setDataInMobile =(mobdata)=>{
-    setMobileData(mobdata)
+   const setGlobalData =(keyName,data)=>{
+    setGlobalObj(prevState=>({...prevState,[keyName]:data}))
   }
 
-  const increMent=(index)=>{
-    // setQty(qty+1);
-    // console.log(index,mobileData[index]);
-
-    setMobileData(prevState=>{
-        let updateMobileData = prevState.map((item,ind)=>{
-            if(ind === index){
-                let quantity = item.quantity ?  item.quantity +1 : 1;
-                return {...item,quantity:quantity}
-            }else{
-                return {...item};
-            }
-
-        })
-        return updateMobileData
+  const incrementGlobalObj =(keyName,index)=>{
+    setGlobalObj(prev=>{
+      const upDateVal = [...prev[keyName]];
+      upDateVal[index].quantity = upDateVal[index].quantity ?  upDateVal[index].quantity +1 : 1;
+      console.log(keyName,upDateVal)
+      return {
+        ...prev,[keyName]:upDateVal
+      }
     })
-      
-   }
+
+  }
+
   return (
     <div className='container-fliud'>
-      <Appcontext.Provider  value={{increMentMobile:increMent,mobileDataInfo:mobileData,setDataMobile:setDataInMobile,cartDatainfo:cartData,getCartNum:getCartNumber,curntPath:currentPath,setActiveTb:setActiveTab,showAlertcall:showAlert}}>
+      <Appcontext.Provider  value={{incrementGlobalObj:incrementGlobalObj,globalObj:globalObj,setGlobalData:setGlobalData,cartDatainfo:cartData,getCartNum:getCartNumber,curntPath:currentPath,setActiveTb:setActiveTab,showAlertcall:showAlert}}>
      <BrowserRouter>
        <Navbarecom></Navbarecom>
        <Routes>
         <Route path='/' element={<Dashboard></Dashboard>}></Route>
         <Route path='/Mobile' element={<Mobile></Mobile>}></Route>
+        <Route path='/Camera' element={<Camera />}></Route>
         <Route path='/Monitor' element={<Monitor favcol='blue'></Monitor>}></Route>
         <Route path='/Tablet' element={<Tablet></Tablet>}></Route>
         <Route path='/Login' element={<Login></Login>}></Route>

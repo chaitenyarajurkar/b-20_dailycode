@@ -3,54 +3,21 @@ import { Appcontext } from '../../App';
 import HOC from '../../other/HOC';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { getMobileData, getTabletData } from '../../other/common';
+import { getTabletData } from '../../other/common';
 
 const Tablet = () => {
-    console.log("Tablet");
     const cartNumb = useContext(Appcontext)
-    console.log(cartNumb);
     const navigate = useNavigate();
-
     const useInfo = localStorage.getItem("userInfo");
-    console.log(useInfo);
-    const [mobileData,setMobileData] = useState([]);
-    const [qty,setQty] = useState(0);
-    
     useEffect(()=>{
-        cartNumb.setActiveTb('Tablet')
+        cartNumb.setActiveTb('Tablet');
+        if(cartNumb.globalObj.tabletData.length === 0){
       getTabletData().then((data)=>{
-        setMobileData(data);
+        cartNumb.setGlobalData("tabletData",data)
 
      });
+    }
     },[])
-
-   const increMent=(index)=>{
-    // setQty(qty+1);
-    console.log(index,mobileData[index]);
-
-    setMobileData(prevState=>{
-        let updateMobileData = prevState.map((item,ind)=>{
-            if(ind === index){
-                let quantity = item.quantity ?  item.quantity +1 : 1;
-                return {...item,quantity:quantity}
-            }else{
-                return {...item};
-            }
-
-        })
-        return updateMobileData
-    })
-      
-   }
-
-//    let obj = {productName:"motorola"};
-
-//    obj.imageurl = "httlpdfggfg/jpg";
-//    obj.decsription = "ddfjdfjdkfjdkfjdk";
-//    console.log(obj);
-// Obj.quantity = 1
-// obj.quantity = obj.quantity +1
-
 
 const addToCart= async(item)=>{
      console.log(item,new Date());
@@ -97,7 +64,7 @@ const openProduct=(product)=>{
     return (
         <div className='container'>
         <div className='row'>
-       {mobileData.length > 0 && mobileData.map((item,index)=>{
+       {cartNumb.globalObj.tabletData.length > 0 && cartNumb.globalObj.tabletData.map((item,index)=>{
            return (
                <div className="card col-4 mx-2" style={{width: "18rem"}}>
                    <img className="card-img-top" src={item.productImageUrl} alt="Card  cap" onClick={()=>openProduct(item)} />
@@ -107,7 +74,7 @@ const openProduct=(product)=>{
                           
 
                        {useInfo !==null &&<>  <div class="btn-group" role="group" aria-label="Basic example">
-                           <button type="button" onClick={() => increMent(index)} class="btn btn-secondary">+</button>
+                           <button type="button" onClick={() => cartNumb.incrementGlobalObj("tabletData",index)} class="btn btn-secondary">+</button>
                            <button type="button" class="btn btn-secondary">{item.quantity ? item.quantity : 0}</button>
                            <button type="button" class="btn btn-secondary">-</button>
                        </div>

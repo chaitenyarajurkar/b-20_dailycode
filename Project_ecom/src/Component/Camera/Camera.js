@@ -6,62 +6,22 @@ import axios from 'axios';
 
 const Camera = () => {
     const cartNumb = useContext(Appcontext)
-    console.log("camera");
     const navigate = useNavigate();
-
     const useInfo = localStorage.getItem("userInfo");
-    console.log(useInfo);
-    const [mobileData,setMobileData] = useState([]);
-    const [qty,setQty] = useState(0);
     
     useEffect(()=>{
-        cartNumb.setActiveTb('Camera')
+        cartNumb.setActiveTb('Camera');
+        if(cartNumb.globalObj.cameraData.length === 0){
       getCameraData().then((data)=>{
-        setMobileData(data);
+        cartNumb.setGlobalData("cameraData",data)
 
      });
+    }
     },[])
 
-   const increMent=(index)=>{
-    // setQty(qty+1);
-    console.log(index,mobileData[index]);
-
-    setMobileData(prevState=>{
-        let updateMobileData = prevState.map((item,ind)=>{
-            if(ind === index){
-                let quantity = item.quantity ?  item.quantity +1 : 1;
-                return {...item,quantity:quantity}
-            }else{
-                return {...item};
-            }
-
-        })
-        return updateMobileData
-    })
-      
-   }
-
-//    let obj = {productName:"motorola"};
-
-//    obj.imageurl = "httlpdfggfg/jpg";
-//    obj.decsription = "ddfjdfjdkfjdkfjdk";
-//    console.log(obj);
-// Obj.quantity = 1
-// obj.quantity = obj.quantity +1
-
-
+   
 const addToCart= async(item)=>{
      console.log(item,new Date());
-
-    //  https://onlinetestapi.gerasim.in/api/Ecomm/AddToCart'  type: post
-
-    // {
-    //     "CartId": 0,  not mandtory
-    //     "CustId": 0,    ls
-    //     "ProductId": 0, product itm
-    //     "Quantity": 0, product itm 
-    //     "AddedDate": "2023-11-20T15:02:00.603Z"
-    //   }
 
     try {
         const useinfo_ls = localStorage.getItem("userInfo");
@@ -95,7 +55,7 @@ const openProduct=(product)=>{
     return (
         <div className='container'>
         <div className='row'>
-       {mobileData.length > 0 && mobileData.map((item,index)=>{
+       {cartNumb.globalObj.cameraData.length > 0 && cartNumb.globalObj.cameraData.map((item,index)=>{
            return (
                <div className="card col-4 mx-2" style={{width: "18rem"}}>
                    <img className="card-img-top" src={item.productImageUrl} alt="Card  cap" onClick={()=>openProduct(item)} />
@@ -105,7 +65,7 @@ const openProduct=(product)=>{
                           
 
                        {useInfo !==null &&<>  <div class="btn-group" role="group" aria-label="Basic example">
-                           <button type="button" onClick={() => increMent(index)} class="btn btn-secondary">+</button>
+                           <button type="button" onClick={() => cartNumb.incrementGlobalObj("cameraData",index)} class="btn btn-secondary">+</button>
                            <button type="button" class="btn btn-secondary">{item.quantity ? item.quantity : 0}</button>
                            <button type="button" class="btn btn-secondary">-</button>
                        </div>
