@@ -1,0 +1,4 @@
+// keys declare
+// MOBILEATA
+//CAMERADATA
+//LAPTOPDATA
