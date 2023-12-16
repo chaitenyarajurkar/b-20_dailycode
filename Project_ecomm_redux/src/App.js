@@ -13,10 +13,6 @@ import CartPage from './other/CartPage';
 // import CreateProduct from './other/CreateProduct';
 import Monitor from './Component/Monitor_class/Monitor';
 import Camera from './Component/Camera/Camera';
-import Footer from './Component/Footer/Footer';
-
-
-
 // import ProductDetail from './other/ProductDetail';
 // import CartPageclass from './other/CartPageclass';
 const LazyCart = React.lazy(()=>import('./other/CartPage'));
@@ -26,7 +22,6 @@ const LazyCartClass = React.lazy(()=>import('./other/CartPageclass'));
 const LazyCreateProduct = React.lazy(()=>import('./other/CreateProduct'))
 const Appcontext = createContext();
 function App() {
-  console.log("App.js")
   const [cartData,setCartData] = useState([]);
   const [currentPath, setCurrentPath] = useState("");
   const [globalObj,setGlobalObj] = useState({
@@ -37,7 +32,6 @@ function App() {
   monitorData:[]
 
 })
-
   const getCartNumber = async () => {
     try {
       const ls = localStorage.getItem('userInfo');
@@ -70,8 +64,6 @@ function App() {
     setGlobalObj(prevState=>({...prevState,[keyName]:data}))
   }
 
- 
-
   const incrementGlobalObj =(keyName,index)=>{
     setGlobalObj(prev=>{
       const upDateVal = [...prev[keyName]];
@@ -102,7 +94,7 @@ function App() {
         <Route path='/productDetail' element={<React.Suspense><LazyProductDetail /></React.Suspense>}></Route>
         <Route path='/cartnew' element={<React.Suspense><LazyCartClass /></React.Suspense>}></Route>
        </Routes>
-        <Footer></Footer>
+     
      </BrowserRouter>
      </Appcontext.Provider>
     </div>
@@ -122,6 +114,3 @@ export {Appcontext};
 //   laptopData:[],
 
 // })
-
-
-// React redux manages the state of the application globally

@@ -3,19 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import { Appcontext } from '../../App';
 import { getCameraData } from '../../other/common';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { storeCameraData } from '../../redux/react-redux/action';
 
 const Camera = () => {
-    console.log("Camera component")
+    const cameraDataFromRedux = useSelector(state=>state.reducers.cameraData);
+    console.log(cameraDataFromRedux);
+    const dispatchedMethod = useDispatch();
     const cartNumb = useContext(Appcontext)
     const navigate = useNavigate();
     const useInfo = localStorage.getItem("userInfo");
     
     useEffect(()=>{
         cartNumb.setActiveTb('Camera');
-        if(cartNumb.globalObj.cameraData.length === 0){
-      getCameraData().then((data)=>{
-        cartNumb.setGlobalData("cameraData",data)
-
+        if(cameraDataFromRedux.length === 0){  
+      getCameraData().then((data)=>{  //api ka data
+        debugger
+        dispatchedMethod(storeCameraData(data)); // react redux logic
+        
      });
     }
     },[])
@@ -56,7 +61,7 @@ const openProduct=(product)=>{
     return (
         <div className='container'>
         <div className='row'>
-       {cartNumb.globalObj.cameraData.length > 0 && cartNumb.globalObj.cameraData.map((item,index)=>{
+       {cameraDataFromRedux.length > 0 && cameraDataFromRedux.map((item,index)=>{
            return (
                <div className="card col-4 mx-2" style={{width: "18rem"}}>
                    <img className="card-img-top" src={item.productImageUrl} alt="Card  cap" onClick={()=>openProduct(item)} />
@@ -83,3 +88,7 @@ const openProduct=(product)=>{
 };
 
 export default Camera;
+
+
+
+

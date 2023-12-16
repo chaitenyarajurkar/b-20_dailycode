@@ -4,26 +4,24 @@ import axios from 'axios';
 import { Appcontext } from '../../App';
 import HOC from '../../other/HOC';
 import { useNavigate } from 'react-router-dom';
-
-// url get tyep   for mobile    https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=1
-
-//for camera   'https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=2
-
-// for tablet   https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=3
-
-// for laptop     https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=4
-
-// for monitor    https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=5
+import { useDispatch, useSelector } from 'react-redux';
+import { storeMobileData } from '../../redux/react-redux/action';
 
 const Mobile = () => {
+    //useSelector hook to acces redux initailState
+    const globalData = useSelector(state=>state.reducers.mobileData);
+   
+    const dispatch = useDispatch();
+
     const cartNumb = useContext(Appcontext)
     const navigate = useNavigate();
     const useInfo = localStorage.getItem("userInfo");
     useEffect(()=>{
         cartNumb.setActiveTb('Mobile')
       if(cartNumb.globalObj.mobileData.length === 0){
-          getMobileData().then((data)=>{
-            cartNumb.setGlobalData("mobileData",data)
+          getMobileData().then((data)=>{  //api call
+            dispatch(storeMobileData(data))  //redux vala logic
+
          });
       }
     },[])
@@ -71,10 +69,12 @@ const openProduct=(product)=>{
     navigate(`/productDetail?id=${product.productId}`,{state:product});
 }
 
+console.log(globalData);
+
     return (
         <div className='container'>
             <div className='row'>
-           {cartNumb.globalObj.mobileData.length > 0 && cartNumb.globalObj.mobileData.map((item,index)=>{
+           {globalData.length > 0 && globalData.map((item,index)=>{
                return (
                    <div className="card col-4 mx-2" style={{width: "18rem"}}>
                        <img className="card-img-top" src={item.productImageUrl} alt="Card  cap" onClick={()=>openProduct(item)} />

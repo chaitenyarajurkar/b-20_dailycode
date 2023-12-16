@@ -5,8 +5,8 @@ import { getData } from '../../other/common';
 import { Link } from 'react-router-dom';
 import { Appcontext } from '../../App';
 const Navbarecom = () => {
-  console.log("Navbar");
  const cartNumb = useContext(Appcontext)
+ console.log("Navbar");
   const [navData, setNavData] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
   const [isAdmin,setIsAdmin] = useState(false);

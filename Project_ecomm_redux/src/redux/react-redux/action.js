@@ -22,11 +22,13 @@ const storeMobileData = (apires)=>(dispatch)=>{
 
 const storeCameraData = (apires)=>(dispatch)=>{
     console.log(apires);
+    debugger
 
     dispatch({
         type:CAMERA_DATA,
         payload:{data:apires}
     })
+    
 
 }
 
