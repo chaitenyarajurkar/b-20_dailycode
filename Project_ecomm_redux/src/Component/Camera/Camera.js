@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Appcontext } from '../../App';
-import { getCameraData } from '../../other/common';
+import { getCameraData, incrementQtyLogic } from '../../other/common';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { storeCameraData } from '../../redux/react-redux/action';
+import { storeCameraData ,showCartData} from '../../redux/react-redux/action';
 
 const Camera = () => {
-    const cameraDataFromRedux = useSelector(state=>state.reducers.cameraData);
-    console.log(cameraDataFromRedux);
+    const reducerData = useSelector(state=>state.reducers);
     const dispatchedMethod = useDispatch();
     const cartNumb = useContext(Appcontext)
     const navigate = useNavigate();
@@ -16,19 +15,15 @@ const Camera = () => {
     
     useEffect(()=>{
         cartNumb.setActiveTb('Camera');
-        if(cameraDataFromRedux.length === 0){  
+        if(reducerData.cameraData.length === 0){  
       getCameraData().then((data)=>{  //api ka data
-        debugger
         dispatchedMethod(storeCameraData(data)); // react redux logic
-        
      });
     }
     },[])
 
    
 const addToCart= async(item)=>{
-     console.log(item,new Date());
-
     try {
         const useinfo_ls = localStorage.getItem("userInfo");
         const getCustId = JSON.parse(useinfo_ls);
@@ -41,13 +36,14 @@ const addToCart= async(item)=>{
         }
         
         const response = await axios.post("https://onlinetestapi.gerasim.in/api/Ecomm/AddToCart",obj);
+        if(response.data.result){
+            //calling api from action.js 
+            dispatchedMethod(showCartData())
 
-        console.log(">>>add to cart",response);
-
-        cartNumb.getCartNum();
-
-
-
+        }
+        else{
+            alert(response.data.data.message)
+        }
 
     } catch (error) {
         console.log(error)
@@ -58,10 +54,16 @@ const openProduct=(product)=>{
 
     navigate(`/productDetail?id=${product.productId}`,{state:product});
 }
+
+const incrementLogic=(index)=>{
+
+    const camera = incrementQtyLogic(reducerData.cameraData,index)  
+    dispatchedMethod(storeCameraData(camera));
+}
     return (
         <div className='container'>
         <div className='row'>
-       {cameraDataFromRedux.length > 0 && cameraDataFromRedux.map((item,index)=>{
+       {reducerData.cameraData.length > 0 && reducerData.cameraData.map((item,index)=>{
            return (
                <div className="card col-4 mx-2" style={{width: "18rem"}}>
                    <img className="card-img-top" src={item.productImageUrl} alt="Card  cap" onClick={()=>openProduct(item)} />
@@ -71,7 +73,7 @@ const openProduct=(product)=>{
                           
 
                        {useInfo !==null &&<>  <div class="btn-group" role="group" aria-label="Basic example">
-                           <button type="button" onClick={() => cartNumb.incrementGlobalObj("cameraData",index)} class="btn btn-secondary">+</button>
+                           <button type="button" onClick={() => incrementLogic(index)} class="btn btn-secondary">+</button>
                            <button type="button" class="btn btn-secondary">{item.quantity ? item.quantity : 0}</button>
                            <button type="button" class="btn btn-secondary">-</button>
                        </div>

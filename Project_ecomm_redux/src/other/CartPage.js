@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Appcontext } from '../App';
+import { useSelector } from 'react-redux';
 
 const CartPage = () => {
 
     const cartNumb = useContext(Appcontext);
+    const reducerData = useSelector(state=>state.reducers);
     const [total,setTotal] = useState(0);
     useEffect(() => {
         cartNumb.setActiveTb('cartpage');
-
-        console.log(cartNumb.cartDatainfo);
         let  add=0;
-        if(cartNumb?.cartDatainfo.length > 0){
-            for(let x of cartNumb.cartDatainfo){
+        if(reducerData.cartData.length > 0){
+            for(let x of reducerData.cartData){
                 if(x.quantity >0 && x.productPrice){
                     add = add + (x.quantity * x.productPrice)
     
@@ -26,7 +26,7 @@ const CartPage = () => {
     return (
         <div className='container'>
 
-            {cartNumb?.cartDatainfo.length > 0 && cartNumb.cartDatainfo.map((item, index) => {
+            {reducerData.cartData.length > 0 && reducerData.cartData.map((item, index) => {
                 return (
 
                     <div className='mt-3'>

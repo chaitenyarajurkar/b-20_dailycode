@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { getMobileData } from '../../other/common';
+import React, { useContext, useEffect } from 'react';
+import { getMobileData, incrementQtyLogic } from '../../other/common';
 import axios from 'axios';
 import { Appcontext } from '../../App';
 import HOC from '../../other/HOC';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { storeMobileData } from '../../redux/react-redux/action';
+import { showCartData, storeMobileData } from '../../redux/react-redux/action';
 
 const Mobile = () => {
     //useSelector hook to acces redux initailState
-    const globalData = useSelector(state=>state.reducers.mobileData);
+    const reducerData = useSelector(state=>state.reducers);
    
     const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ const Mobile = () => {
     const useInfo = localStorage.getItem("userInfo");
     useEffect(()=>{
         cartNumb.setActiveTb('Mobile')
-      if(cartNumb.globalObj.mobileData.length === 0){
+      if(reducerData.mobileData.length === 0){
           getMobileData().then((data)=>{  //api call
             dispatch(storeMobileData(data))  //redux vala logic
 
@@ -27,18 +27,6 @@ const Mobile = () => {
     },[])
 
 const addToCart= async(item)=>{
-     console.log(item,new Date());
-
-    //  https://onlinetestapi.gerasim.in/api/Ecomm/AddToCart'  type: post
-
-    // {
-    //     "CartId": 0,  not mandtory
-    //     "CustId": 0,    ls
-    //     "ProductId": 0, product itm
-    //     "Quantity": 0, product itm 
-    //     "AddedDate": "2023-11-20T15:02:00.603Z"
-    //   }
-
     try {
         const useinfo_ls = localStorage.getItem("userInfo");
         const getCustId = JSON.parse(useinfo_ls);
@@ -51,13 +39,13 @@ const addToCart= async(item)=>{
         }
         
         const response = await axios.post("https://onlinetestapi.gerasim.in/api/Ecomm/AddToCart",obj);
-
-        console.log(">>>add to cart",response);
-
-        cartNumb.getCartNum();
-
-
-
+        if(response.data.result){
+            //calling api from action.js 
+            dispatch(showCartData())
+        }
+        else{
+            alert(response.data.data.message)
+        }
 
     } catch (error) {
         console.log(error)
@@ -65,16 +53,17 @@ const addToCart= async(item)=>{
 }
 
 const openProduct=(product)=>{
-
     navigate(`/productDetail?id=${product.productId}`,{state:product});
 }
 
-console.log(globalData);
-
+const incrementLogic=(index)=>{
+    const mobileData = incrementQtyLogic(reducerData.mobileData,index);  
+    dispatch(storeMobileData(mobileData));
+}
     return (
         <div className='container'>
             <div className='row'>
-           {globalData.length > 0 && globalData.map((item,index)=>{
+           {reducerData.mobileData.length > 0 && reducerData.mobileData.map((item,index)=>{
                return (
                    <div className="card col-4 mx-2" style={{width: "18rem"}}>
                        <img className="card-img-top" src={item.productImageUrl} alt="Card  cap" onClick={()=>openProduct(item)} />
@@ -84,7 +73,7 @@ console.log(globalData);
                               
 
                            {useInfo !==null &&<>  <div class="btn-group" role="group" aria-label="Basic example">
-                               <button type="button" onClick={() => cartNumb.incrementGlobalObj("mobileData",index)} class="btn btn-secondary">+</button>
+                               <button type="button" onClick={() => incrementLogic(index)} class="btn btn-secondary">+</button>
                                <button type="button" class="btn btn-secondary">{item.quantity ? item.quantity : 0}</button>
                                <button type="button" class="btn btn-secondary">-</button>
                            </div>

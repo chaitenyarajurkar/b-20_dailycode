@@ -37,7 +37,13 @@ const getData = async () => {
     } catch (error) {
     }
   }
-  export {getData,getMobileData,getCameraData,getTabletData};
+
+  const incrementQtyLogic = (data,index)=>{
+    const product = data;
+    product[index].quantity = product[index].quantity ?  product[index].quantity +1 : 1;
+    return product;
+  }
+  export {getData,getMobileData,getCameraData,getTabletData,incrementQtyLogic};
 
 
 

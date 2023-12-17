@@ -1,6 +1,6 @@
 // data store 
 
-import { CAMERA_DATA, LAPTOP_DATA, MOBILE_DATA } from "./constant";
+import { CAMERA_DATA, CART_DATA, LAPTOP_DATA, MOBILE_DATA } from "./constant";
 
 // obj ={
 //     mobil:"",
@@ -15,6 +15,7 @@ const initialState = {
     laptopData: [],
     monitorData: [],
     cartData:[],
+
 
 
 }
@@ -33,7 +34,6 @@ const initialState = {
 
 export default function applicationReducer(state=initialState,action){
 
-    debugger
     switch (action.type){
          case MOBILE_DATA:
              return{
@@ -41,7 +41,6 @@ export default function applicationReducer(state=initialState,action){
                 mobileData : action.payload.data
              }
          case CAMERA_DATA:
-            debugger
             return{
                 ...state,
                 cameraData:action.payload.data
@@ -51,7 +50,11 @@ export default function applicationReducer(state=initialState,action){
                 ...state,
                 laptopData:action.payload.data
             }
-
+        case CART_DATA:
+            return{
+                ...state,
+                cartData:action.payload.data
+            }
         default:
             return{
                 ...state

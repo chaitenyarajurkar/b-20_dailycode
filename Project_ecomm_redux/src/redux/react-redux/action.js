@@ -1,6 +1,7 @@
 //functiona call
 
-import { CAMERA_DATA, LAPTOP_DATA, MOBILE_DATA } from "./constant";
+import axios from "axios";
+import { CAMERA_DATA, CART_DATA, LAPTOP_DATA, MOBILE_DATA } from "./constant";
 
 
 
@@ -10,7 +11,6 @@ import { CAMERA_DATA, LAPTOP_DATA, MOBILE_DATA } from "./constant";
 
 
 const storeMobileData = (apires)=>(dispatch)=>{
-    console.log(apires);
 
     dispatch({
         type:MOBILE_DATA,
@@ -21,8 +21,6 @@ const storeMobileData = (apires)=>(dispatch)=>{
 
 
 const storeCameraData = (apires)=>(dispatch)=>{
-    console.log(apires);
-    debugger
 
     dispatch({
         type:CAMERA_DATA,
@@ -43,5 +41,42 @@ const storeLaptopData = (apires)=>(dispatch)=>{
 }
 
 
+const incrementCameraData = (index,cameraData)=>(dispatch)=>{
+    console.log(index,cameraData);//yaha pr camera data ayega with index
 
-export {storeMobileData,storeCameraData,storeLaptopData}
+    // modified the camera data here
+    const camera = cameraData;
+    camera[index].quantity = camera[index].quantity ?  camera[index].quantity +1 : 1;
+    console.log(camera);
+
+    //updated camera data sending to reducer obj
+    dispatch({
+        type:CAMERA_DATA,
+        payload:{data:camera}
+    })
+    
+
+}
+
+const showCartData=()=>async(dispatch)=>{
+
+    try {
+        const ls = localStorage.getItem('userInfo');
+        const userinfo = JSON.parse(ls);
+        const res = await axios.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetCartProductsByCustomerId?id=${userinfo.custId}`);
+        console.log(res.data.data)
+        
+        dispatch({
+            type:CART_DATA,
+            payload:{data:res.data.data}
+        })
+
+      } catch (error) {
+        console.log(error)
+      }
+
+
+
+}
+
+export {storeMobileData,storeCameraData,storeLaptopData,incrementCameraData,showCartData}

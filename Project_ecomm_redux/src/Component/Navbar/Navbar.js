@@ -4,9 +4,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import { getData } from '../../other/common';
 import { Link } from 'react-router-dom';
 import { Appcontext } from '../../App';
+import { useDispatch, useSelector } from 'react-redux';
+import { showCartData } from '../../redux/react-redux/action';
 const Navbarecom = () => {
- const cartNumb = useContext(Appcontext)
- console.log("Navbar");
+ const cartNumb = useContext(Appcontext);
+ const reducersData = useSelector(state=>state.reducers);
+ const dispatch = useDispatch();
   const [navData, setNavData] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
   const [isAdmin,setIsAdmin] = useState(false);
@@ -27,7 +30,7 @@ const Navbarecom = () => {
     }
 
     cartNumb.setActiveTb();
-    cartNumb.getCartNum();
+    dispatch(showCartData());
    
 
     getData().then((data) => {
@@ -50,10 +53,6 @@ const Navbarecom = () => {
 
   const logout = () => {
     localStorage.clear();
-
-    // window.location.reload();
-    // setIsLogin(false);
-    // window.location.href = "/Login"
     window.location.href = "/"
 
   }
@@ -71,7 +70,7 @@ const Navbarecom = () => {
           })}
 
 
-          <Nav.Link as={Link} to="/cartpage" onClick={() => setActiveTAB("cartpage")}  style={cartNumb.curntPath.indexOf("cartpage") > -1 ? { color: "red" } : {}}>Cart<sup>{cartNumb.cartDatainfo?.length}</sup></Nav.Link>
+          <Nav.Link as={Link} to="/cartpage" onClick={() => setActiveTAB("cartpage")}  style={cartNumb.curntPath.indexOf("cartpage") > -1 ? { color: "red" } : {}}>Cart<sup>{reducersData.cartData?.length}</sup></Nav.Link>
           <Nav.Link as={Link} to="/cartnew" onClick={() => setActiveTAB("cartnew")}>CartNew</Nav.Link>
 
          {isAdmin && <Nav.Link as={Link} to="/creatProduct" onClick={() => setActiveTAB("creatProduct")}  style={cartNumb.curntPath.indexOf("creatProduct") > -1 ? { color: "red" } : {}}>Create Product</Nav.Link>}
