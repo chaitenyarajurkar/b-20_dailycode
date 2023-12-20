@@ -58,6 +58,8 @@ const openProduct=(product)=>{
 
 const incrementLogic=(index)=>{
     const mobileData = incrementQtyLogic(reducerData.mobileData,index);  
+
+    // this mobileData is a modified array of object
     dispatch(storeMobileData(mobileData));
 }
     return (

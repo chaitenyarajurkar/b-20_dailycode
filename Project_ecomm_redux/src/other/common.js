@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-
+import axiosInstance from '../AxiosInterceptor/axiosInterceptor';
 
 const getData = async () => {
     try {
-      const response = await axios.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllCategory`);
+      const response = await axiosInstance.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllCategory`);
       console.log(response.data.data);
       return response.data.data;
     } catch (error) {
@@ -39,7 +39,7 @@ const getData = async () => {
   }
 
   const incrementQtyLogic = (data,index)=>{
-    const product = data;
+    const product = data;  //product ka array ata hai
     product[index].quantity = product[index].quantity ?  product[index].quantity +1 : 1;
     return product;
   }

@@ -10,11 +10,11 @@ import { CAMERA_DATA, CART_DATA, LAPTOP_DATA, MOBILE_DATA } from "./constant";
 // 3)lptop k  liye
 
 
-const storeMobileData = (apires)=>(dispatch)=>{
+const storeMobileData = (mobiledata)=>(dispatch)=>{
 
     dispatch({
         type:MOBILE_DATA,
-        payload:{data:apires}
+        payload:{data:mobiledata}
     })
 
 }

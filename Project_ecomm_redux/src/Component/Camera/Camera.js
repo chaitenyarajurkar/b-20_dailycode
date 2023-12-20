@@ -22,6 +22,8 @@ const Camera = () => {
     }
     },[])
 
+
+    
    
 const addToCart= async(item)=>{
     try {
