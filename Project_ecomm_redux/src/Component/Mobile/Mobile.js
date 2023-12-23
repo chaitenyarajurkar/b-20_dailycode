@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 
-import { commonAPi, getMobileData, incrementQtyLogic } from '../../other/common';
+import { commonAPi, getMobileData, getParamspair, incrementQtyLogic } from '../../other/common';
 import axios from 'axios';
 import { Appcontext } from '../../App';
 import HOC from '../../other/HOC';
@@ -12,7 +12,6 @@ import style from './mobile.module.css'
 const Mobile = () => {
     //useSelector hook to acces redux initailState
     const reducerData = useSelector(state=>state.reducers);
-   
     const dispatch = useDispatch();
 
     const cartNumb = useContext(Appcontext)
@@ -20,15 +19,9 @@ const Mobile = () => {
     const useInfo = localStorage.getItem("userInfo");
     useEffect(()=>{
         cartNumb.setActiveTb('Mobile');
-
-        const urlString = window.location.href;
-        const url = new URL(urlString);
-        const params1 = new URLSearchParams(url.search);
-        params1.forEach((value, key) => {
-            console.log(value, key);
-        });
+        const paramspair = getParamspair();  //getting search parameters from common.js function 
       if(reducerData.mobileData?.length === 0){
-        commonAPi(1).then((data)=>{  //api call
+        commonAPi(paramspair.id).then((data)=>{  //api call
             dispatch(storeMobileData(data))  //redux vala logic
 
          });
@@ -73,13 +66,13 @@ const incrementLogic=(index)=>{
 }
     return (
         <div className={`container ${style.backgroundChange}`}>
-            <div className='row'>
+            <div className='row text-center'>
            {reducerData.mobileData?.length > 0 && reducerData.mobileData.map((item,index)=>{
                return (
-                   <div className="card col-4 mx-2 " style={{width: "18rem"}}>
-                       <img className="card-img-top" src={item.productImageUrl} alt="Card  cap" onClick={()=>openProduct(item)} />
+                   <div className="card col-4 mx-auto mt-2 mb-2" style={{width: "18rem"}}>
+                       <img className="card-img-top pt-2" src={item.productImageUrl} height={'50%'} alt="Card  cap" onClick={()=>openProduct(item)} />
                            <div className="card-body">
-                               <h5 className="card-title">{item.productName}</h5>
+                               <h6 className="card-title">{item.productName}</h6>
                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                               
 

@@ -31,8 +31,9 @@ const HOC = (WrapperComponent)=>{
         render(){
 
             const ls  = localStorage.getItem('userInfo');
+            const isAdmin = localStorage.getItem('isAdmin');
             const userInfo = JSON.parse(ls);
-            if(userInfo !==null){
+            if(userInfo !==null || isAdmin !==null){
                 return <WrapperComponent />
             }
             else{

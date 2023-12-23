@@ -21,7 +21,7 @@ const Navbarecom = () => {
     
     const userInfo = localStorage.getItem("userInfo");
     const isadmin = localStorage.getItem("isAdmin");
-    if (userInfo !== null || isAdmin) {
+    if (userInfo !== null || isAdmin !== null) {
       setIsLogin(true);
     }
 
@@ -71,7 +71,7 @@ const Navbarecom = () => {
 
 
           <Nav.Link as={Link} to="/cartpage" onClick={() => setActiveTAB("cartpage")}  style={cartNumb.curntPath.indexOf("cartpage") > -1 ? { color: "red" } : {}}>Cart<sup>{reducersData.cartData?.length}</sup></Nav.Link>
-          <Nav.Link as={Link} to="/cartnew" onClick={() => setActiveTAB("cartnew")}>CartNew</Nav.Link>
+          {/* <Nav.Link as={Link} to="/cartnew" onClick={() => setActiveTAB("cartnew")}>CartNew</Nav.Link> */}
 
          {isAdmin && <Nav.Link as={Link} to="/creatProduct" onClick={() => setActiveTAB("creatProduct")}  style={cartNumb.curntPath.indexOf("creatProduct") > -1 ? { color: "red" } : {}}>Create Product</Nav.Link>}
         </Nav>

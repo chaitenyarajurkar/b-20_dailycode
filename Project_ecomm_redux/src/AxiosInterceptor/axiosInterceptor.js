@@ -7,13 +7,14 @@ axiosInstance.interceptors.request.use((config)=>{
     console.log("axiosInstance.interceptors.request")
 
     const token = localStorage.getItem("token");
+    const isAdmin = localStorage.getItem("isAdmin");
     const myDecodedToken = decodeToken(token);
     const isMyTokenExpired = isExpired(token);
     debugger
     console.log(myDecodedToken,isMyTokenExpired)
 
     // decode the token or check the expiry of the token
-    if(!isMyTokenExpired){
+    if(!isMyTokenExpired || isAdmin !== null){
        return config;
         
     }else{

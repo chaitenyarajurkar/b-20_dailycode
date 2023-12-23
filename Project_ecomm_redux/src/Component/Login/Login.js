@@ -8,8 +8,7 @@ const Login = () => {
 
 
     const [formData, setFormData] = useState({
-        username: "", paasword: "", dropvalue:""
-        // ,email:""
+        username: "", paasword: ""
     })
    const [eror,setError] = useState([]);
 
@@ -97,11 +96,6 @@ const Login = () => {
            }else{
             alert(response.message)
            }
-            // {
-            //     "UserName": "3874834783478347",
-            //     "UserPassword": "prava@1234"
-            //   }
-
         }
          }
     }
@@ -110,8 +104,6 @@ const Login = () => {
 
       return  eror.indexOf(value) > -1 ? true : false;
    }
-     
-   const optionArray = ["item1","item2","item3"];
 
     return (
         <div className='container offset-3 col-6 pt-3'>
@@ -131,19 +123,7 @@ const Login = () => {
                         handleError={handleError("paasword")}
                     ></Text>
                 </div>
-
                 <button type="submit" className="btn btn-primary mt-2">Submit</button>
-
-
-                <div className="form-group mt-2">
-                    <Label labelName="Drop Down"></Label>
-                    <Select value={formData.dropvalue} fieldname="dropvalue" 
-                     options={optionArray} onChangeHandler={onChangeHandler}
-                     handleError={handleError("dropvalue")}
-                    ></Select>
-                    </div>
-
-
             </form>
         </div>
     );

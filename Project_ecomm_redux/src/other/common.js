@@ -53,7 +53,19 @@ const getData = async () => {
     product[index].quantity = product[index].quantity ?  product[index].quantity +1 : 1;
     return product;
   }
-  export {getData,getMobileData,getCameraData,getTabletData,incrementQtyLogic,commonAPi};
+
+  const getParamspair=()=>{
+    const urlString = window.location.href;
+    const url = new URL(urlString);
+    const params1 = new URLSearchParams(url.search);
+    const pramspair ={};
+    params1.forEach((value, key) => {
+        console.log(value, key);
+        pramspair[key]= value
+    });
+    return pramspair;
+  }
+  export {getData,getMobileData,getCameraData,getTabletData,incrementQtyLogic,commonAPi,getParamspair};
 
 
 
