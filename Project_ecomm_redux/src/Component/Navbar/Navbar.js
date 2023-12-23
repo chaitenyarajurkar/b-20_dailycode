@@ -64,7 +64,7 @@ const Navbarecom = () => {
         <Nav className="me-auto">
           {navData?.slice(0, 5).map((item, index) => {
             return (
-              <Nav.Link as={Link} to={item.categoryName} onClick={() => setActiveTAB(item.categoryName)} style={cartNumb.curntPath.indexOf(item.categoryName) > -1 ? { color: "red" } : {}}>{item.categoryName}</Nav.Link>
+              <Nav.Link as={Link} to={`${item.categoryName}?id=${index+1}`} onClick={() => setActiveTAB(item.categoryName)} style={cartNumb.curntPath.indexOf(item.categoryName) > -1 ? { color: "red" } : {}}>{item.categoryName}</Nav.Link>
             )
 
           })}

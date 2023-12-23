@@ -52,6 +52,7 @@ function App() {
         <Route path='/creatProduct' element={<React.Suspense><LazyCreateProduct /></React.Suspense>}></Route>
         <Route path='/productDetail' element={<React.Suspense><LazyProductDetail /></React.Suspense>}></Route>
         <Route path='/cartnew' element={<React.Suspense><LazyCartClass /></React.Suspense>}></Route>
+        {/* edit product route */}
        </Routes>
      
      </BrowserRouter>

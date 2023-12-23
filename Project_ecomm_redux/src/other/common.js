@@ -38,12 +38,22 @@ const getData = async () => {
     }
   }
 
+  const commonAPi = async (id) => {
+    try {
+      const response = await axiosInstance.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=${id}`);
+      console.log(response.data.data);
+      return response.data.data;
+    } catch (error) {
+    }
+  }
+
+
   const incrementQtyLogic = (data,index)=>{
     const product = data;  //product ka array ata hai
     product[index].quantity = product[index].quantity ?  product[index].quantity +1 : 1;
     return product;
   }
-  export {getData,getMobileData,getCameraData,getTabletData,incrementQtyLogic};
+  export {getData,getMobileData,getCameraData,getTabletData,incrementQtyLogic,commonAPi};
 
 
 

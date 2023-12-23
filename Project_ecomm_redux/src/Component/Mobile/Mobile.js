@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 
-import { getMobileData, incrementQtyLogic } from '../../other/common';
+import { commonAPi, getMobileData, incrementQtyLogic } from '../../other/common';
 import axios from 'axios';
 import { Appcontext } from '../../App';
 import HOC from '../../other/HOC';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { showCartData, storeMobileData } from '../../redux/react-redux/action';
 import axiosInstance from '../../AxiosInterceptor/axiosInterceptor';
-
+import style from './mobile.module.css'
 const Mobile = () => {
     //useSelector hook to acces redux initailState
     const reducerData = useSelector(state=>state.reducers);
@@ -19,9 +19,16 @@ const Mobile = () => {
     const navigate = useNavigate();
     const useInfo = localStorage.getItem("userInfo");
     useEffect(()=>{
-        cartNumb.setActiveTb('Mobile')
+        cartNumb.setActiveTb('Mobile');
+
+        const urlString = window.location.href;
+        const url = new URL(urlString);
+        const params1 = new URLSearchParams(url.search);
+        params1.forEach((value, key) => {
+            console.log(value, key);
+        });
       if(reducerData.mobileData?.length === 0){
-          getMobileData().then((data)=>{  //api call
+        commonAPi(1).then((data)=>{  //api call
             dispatch(storeMobileData(data))  //redux vala logic
 
          });
@@ -65,11 +72,11 @@ const incrementLogic=(index)=>{
     dispatch(storeMobileData(mobileData));
 }
     return (
-        <div className='container'>
+        <div className={`container ${style.backgroundChange}`}>
             <div className='row'>
            {reducerData.mobileData?.length > 0 && reducerData.mobileData.map((item,index)=>{
                return (
-                   <div className="card col-4 mx-2" style={{width: "18rem"}}>
+                   <div className="card col-4 mx-2 " style={{width: "18rem"}}>
                        <img className="card-img-top" src={item.productImageUrl} alt="Card  cap" onClick={()=>openProduct(item)} />
                            <div className="card-body">
                                <h5 className="card-title">{item.productName}</h5>
