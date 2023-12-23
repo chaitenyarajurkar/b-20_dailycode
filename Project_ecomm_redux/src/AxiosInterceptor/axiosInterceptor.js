@@ -1,11 +1,29 @@
-import axios from 'axios';
 
+import axios from 'axios';
+import { isExpired, decodeToken } from "react-jwt";
 const axiosInstance = axios.create();
 
 axiosInstance.interceptors.request.use((config)=>{
     console.log("axiosInstance.interceptors.request")
+
+    const token = localStorage.getItem("token");
+    const myDecodedToken = decodeToken(token);
+    const isMyTokenExpired = isExpired(token);
+    debugger
+    console.log(myDecodedToken,isMyTokenExpired)
+
+    // decode the token or check the expiry of the token
+    if(!isMyTokenExpired){
+       return config;
+        
+    }else{
+        // logout vala logic if token is expire
+        localStorage.clear();
+        window.location.href = "/Login";
+
+
+    }
   //you can modifiy the request 
-    return config;
 },(error)=>{
     return Promise.reject(error);
 })

@@ -19,6 +19,26 @@ const Login = () => {
 
         //LOGIC KI KITNI FIELDS EMPTY HAI
     }
+
+  const jwtTokenCall=async()=>{
+    //jwtapi call  url        http://localhost:8000/auth/login   type=post
+    try {
+        let reqBody ={
+            "email":"nilson@email.com",
+            "password":"nilson"
+   
+          }
+      const res = await axios.post("http://localhost:8000/auth/login",reqBody)
+           console.log(res)
+           localStorage.setItem("token",res.data.access_token);
+           alert("Login Succesfull");
+           window.location.href = "/";
+    } catch (error) {
+        
+    }
+       
+  }
+
     const submitHandler = async(e) => {
         e.preventDefault();
         let errorArray = [];
@@ -47,7 +67,7 @@ const Login = () => {
                 //   adminlogic
 
                 localStorage.setItem("isAdmin",true);
-                alert("Login Succesfull");
+              
                 window.location.href = "/";
             }
 
@@ -65,9 +85,14 @@ const Login = () => {
            console.log(result.data);
            const response = result.data
            if(response.data !== null  && response.result ){
+
+                // here login is successfull
+                // jwt token api hit kruga
+
+                jwtTokenCall();
+                
                localStorage.setItem("userInfo",JSON.stringify(response.data));
-               alert("Login Succesfull");
-               window.location.href = "/";
+             
               
            }else{
             alert(response.message)

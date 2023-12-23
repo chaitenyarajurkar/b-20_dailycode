@@ -62,7 +62,7 @@ const Navbarecom = () => {
       <Navbar bg="dark" data-bs-theme="dark">
         <Navbar.Brand ><a href='/'>Ecommerce</a></Navbar.Brand>
         <Nav className="me-auto">
-          {navData.slice(0, 5).map((item, index) => {
+          {navData?.slice(0, 5).map((item, index) => {
             return (
               <Nav.Link as={Link} to={item.categoryName} onClick={() => setActiveTAB(item.categoryName)} style={cartNumb.curntPath.indexOf(item.categoryName) > -1 ? { color: "red" } : {}}>{item.categoryName}</Nav.Link>
             )

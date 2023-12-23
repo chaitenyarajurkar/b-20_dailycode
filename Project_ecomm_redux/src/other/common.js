@@ -4,7 +4,7 @@ import axiosInstance from '../AxiosInterceptor/axiosInterceptor';
 
 const getData = async () => {
     try {
-      const response = await axiosInstance.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllCategory`);
+      const response = await axios.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllCategory`);
       console.log(response.data.data);
       return response.data.data;
     } catch (error) {
@@ -13,7 +13,7 @@ const getData = async () => {
   
   const getMobileData = async () => {
     try {
-      const response = await axios.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=1`);
+      const response = await axiosInstance.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=1`);
       console.log(response.data.data);
       return response.data.data;
     } catch (error) {
@@ -22,7 +22,7 @@ const getData = async () => {
 
   const getTabletData = async () => {
     try {
-      const response = await axios.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=3`);
+      const response = await axiosInstance.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=3`);
       console.log(response.data.data);
       return response.data.data;
     } catch (error) {
@@ -31,7 +31,7 @@ const getData = async () => {
 
   const getCameraData = async () => {
     try {
-      const response = await axios.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=2`);
+      const response = await axiosInstance.get(`https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId?id=2`);
       console.log(response.data.data);
       return response.data.data;
     } catch (error) {

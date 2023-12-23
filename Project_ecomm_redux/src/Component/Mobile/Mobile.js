@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+
 import { getMobileData, incrementQtyLogic } from '../../other/common';
 import axios from 'axios';
 import { Appcontext } from '../../App';
@@ -6,6 +7,7 @@ import HOC from '../../other/HOC';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { showCartData, storeMobileData } from '../../redux/react-redux/action';
+import axiosInstance from '../../AxiosInterceptor/axiosInterceptor';
 
 const Mobile = () => {
     //useSelector hook to acces redux initailState
@@ -18,7 +20,7 @@ const Mobile = () => {
     const useInfo = localStorage.getItem("userInfo");
     useEffect(()=>{
         cartNumb.setActiveTb('Mobile')
-      if(reducerData.mobileData.length === 0){
+      if(reducerData.mobileData?.length === 0){
           getMobileData().then((data)=>{  //api call
             dispatch(storeMobileData(data))  //redux vala logic
 
@@ -38,7 +40,7 @@ const addToCart= async(item)=>{
             "AddedDate": new Date()
         }
         
-        const response = await axios.post("https://onlinetestapi.gerasim.in/api/Ecomm/AddToCart",obj);
+        const response = await axiosInstance.post("https://onlinetestapi.gerasim.in/api/Ecomm/AddToCart",obj);
         if(response.data.result){
             //calling api from action.js 
             dispatch(showCartData())
@@ -65,7 +67,7 @@ const incrementLogic=(index)=>{
     return (
         <div className='container'>
             <div className='row'>
-           {reducerData.mobileData.length > 0 && reducerData.mobileData.map((item,index)=>{
+           {reducerData.mobileData?.length > 0 && reducerData.mobileData.map((item,index)=>{
                return (
                    <div className="card col-4 mx-2" style={{width: "18rem"}}>
                        <img className="card-img-top" src={item.productImageUrl} alt="Card  cap" onClick={()=>openProduct(item)} />
