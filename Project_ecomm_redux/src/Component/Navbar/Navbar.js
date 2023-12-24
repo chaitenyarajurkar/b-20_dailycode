@@ -21,11 +21,11 @@ const Navbarecom = () => {
     
     const userInfo = localStorage.getItem("userInfo");
     const isadmin = localStorage.getItem("isAdmin");
-    if (userInfo !== null || isAdmin !== null) {
+    if (userInfo !== null || isadmin !== null) {
       setIsLogin(true);
     }
 
-    if(isadmin){
+    if(isadmin !== null){
       setIsAdmin(true);
     }
 

@@ -5,7 +5,9 @@ import { commonAPi, getParamspair, incrementQtyLogic } from '../../other/common'
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { storeCameraData ,showCartData} from '../../redux/react-redux/action';
-import style from  './camera.module.css'
+import style from  './camera.module.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faEdit,faTrash} from '@fortawesome/free-solid-svg-icons';
 const Camera = () => {
     const reducerData = useSelector(state=>state.reducers);
     const dispatchedMethod = useDispatch();
@@ -63,13 +65,28 @@ const incrementLogic=(index)=>{
     const camera = incrementQtyLogic(reducerData.cameraData,index)  
     dispatchedMethod(storeCameraData(camera));
 }
+const openUpdateCart=(product)=>{
+    navigate(`/updateProduct?id=${product.productId}`,{state:product});
+}
+const deletProduct=async(product)=>{
+    const res = await axios.get("https://onlinetestapi.gerasim.in/api/Ecomm/DeleteProductById",{params:{id:product.productId}});
+    console.log(res);
+    commonAPi(2).then((data)=>{  //api call
+        dispatchedMethod(storeCameraData(data));
+
+     });
+
+}
     return (
         <div className={`container ${style.backgroundChange}`}>
         <div className='row'>
        {reducerData.cameraData.length > 0 && reducerData.cameraData.map((item,index)=>{
            return (
                <div className="card col-4 mx-auto mt-2 mb-2 " style={{width: "18rem"}}>
-                   <img className="card-img-top pt-2" src={item.productImageUrl} height={'50%'} alt="Card  cap" onClick={()=>openProduct(item)} />
+               <FontAwesomeIcon className="left mr-3" onClick={()=>openUpdateCart(item)} style={{cursor:"pointer",color:"grey"}} icon={faEdit} />
+                    <FontAwesomeIcon className="right" onClick={()=>deletProduct(item)} icon={faTrash}  style={{cursor:"pointer",color:"grey"}} />
+                     
+                   <img className="card-img-top pt-3" src={item.productImageUrl} height={'50%'} alt="Card  cap" onClick={()=>openProduct(item)} />
                        <div className="card-body">
                            <h5 className="card-title">{item.productName}</h5>
                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

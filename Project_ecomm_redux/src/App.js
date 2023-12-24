@@ -13,7 +13,8 @@ const LazyCart = React.lazy(()=>import('./other/CartPage'));
 const LazyProductDetail = React.lazy(()=>import('./other/ProductDetail'));
 const LazySignup = React.lazy(()=>import('./Component/Signup/Signup'));
 const LazyCartClass = React.lazy(()=>import('./other/CartPageclass'));
-const LazyCreateProduct = React.lazy(()=>import('./other/CreateProduct'))
+const LazyCreateProduct = React.lazy(()=>import('./other/CreateProduct'));
+const UpdateProd = React.lazy(()=>import('./other/UpdateProduct'));
 const Appcontext = createContext();
 function App() {
   const [currentPath, setCurrentPath] = useState("");
@@ -52,6 +53,7 @@ function App() {
         <Route path='/creatProduct' element={<React.Suspense><LazyCreateProduct /></React.Suspense>}></Route>
         <Route path='/productDetail' element={<React.Suspense><LazyProductDetail /></React.Suspense>}></Route>
         <Route path='/cartnew' element={<React.Suspense><LazyCartClass /></React.Suspense>}></Route>
+        <Route path='/updateProduct' element={<React.Suspense><UpdateProd /></React.Suspense>}></Route>
         {/* edit product route */}
        </Routes>
      

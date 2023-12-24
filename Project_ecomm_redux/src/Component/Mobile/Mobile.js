@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { showCartData, storeMobileData } from '../../redux/react-redux/action';
 import axiosInstance from '../../AxiosInterceptor/axiosInterceptor';
 import style from './mobile.module.css'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faEdit,faTrash} from '@fortawesome/free-solid-svg-icons';
+
 const Mobile = () => {
     //useSelector hook to acces redux initailState
     const reducerData = useSelector(state=>state.reducers);
@@ -58,19 +61,34 @@ const openProduct=(product)=>{
     navigate(`/productDetail?id=${product.productId}`,{state:product});
 }
 
+const openUpdateCart=(product)=>{
+    navigate(`/updateProduct?id=${product.productId}`,{state:product});
+}
 const incrementLogic=(index)=>{
     const mobileData = incrementQtyLogic(reducerData.mobileData,index);  
 
     // this mobileData is a modified array of object
     dispatch(storeMobileData(mobileData));
 }
+
+const deletProduct=async(product)=>{
+    const res = await axios.get("https://onlinetestapi.gerasim.in/api/Ecomm/DeleteProductById",{params:{id:product.productId}});
+    console.log(res);
+    commonAPi(1).then((data)=>{  //api call
+        dispatch(storeMobileData(data))  //redux vala logic
+
+     });
+
+}
     return (
         <div className={`container ${style.backgroundChange}`}>
-            <div className='row text-center'>
+            <div className='row'>
            {reducerData.mobileData?.length > 0 && reducerData.mobileData.map((item,index)=>{
                return (
                    <div className="card col-4 mx-auto mt-2 mb-2" style={{width: "18rem"}}>
-                       <img className="card-img-top pt-2" src={item.productImageUrl} height={'50%'} alt="Card  cap" onClick={()=>openProduct(item)} />
+                    <FontAwesomeIcon className="left mr-3" onClick={()=>openUpdateCart(item)} style={{cursor:"pointer",color:"grey"}} icon={faEdit} />
+                    <FontAwesomeIcon className="right" onClick={()=>deletProduct(item)} icon={faTrash}  style={{cursor:"pointer",color:"grey"}} />
+                       <img className="card-img-top pt-3" src={item.productImageUrl} height={'50%'} alt="Card  cap" onClick={()=>openProduct(item)} />
                            <div className="card-body">
                                <h6 className="card-title">{item.productName}</h6>
                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
-const Childcomponent = () => {
-    console.log("hello this is child")
+const Childcomponent = (props) => {
+    console.log("hello this is child",props.formData)
     return (
         <div>
             <h6>hello this is child</h6>

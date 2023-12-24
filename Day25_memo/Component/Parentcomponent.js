@@ -34,7 +34,7 @@ const Parentcomponent = () => {
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
 
-            <Childcomponent></Childcomponent>
+            <Childcomponent formData={formData} ></Childcomponent>
 
         </div>
     );
